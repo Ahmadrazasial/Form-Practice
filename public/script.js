@@ -100,7 +100,6 @@ async function formApi() {
             email: signupform.email.value,
             password: signupform.password.value
         }
-        console.log(formdata)
         try {
             const res = await fetch("/signup",
                 {
