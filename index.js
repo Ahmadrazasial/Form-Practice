@@ -16,21 +16,10 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 
 const connect = await mongoose.connect("mongodb://localhost:27017/users");
-app.post("/signup", [
-    body('firstname').trim().isLength({ min: 1 }).withMessage('First name is required').isAlpha().withMessage('First name must contain only letters'),
-    body('lastname').trim().isLength({ min: 1 }).withMessage('Last name is required').isAlpha().withMessage('Last name must contain only letters'),
-], async (req, res) => {
+app.post("/signup",  async (req, res) => {
     try {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
-
-        const { firstname, lastname, cCode, number, email, password } = req.body;
         const fields = {}
-
-        const requiredFields = ["cCode", "number", "email", "password"];
-
+      const requiredFields = ["firstname", "lastname", "cCode", "number", "email", "password"];
         for (const key of requiredFields) {
             if (!req.body[key] || req.body[key].toString().trim() === "") {
                 fields[key] = `${key} is required`;
