@@ -1,0 +1,3 @@
+[undefined] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[undefined] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[undefined] INFO : Incoming request: POST /signup

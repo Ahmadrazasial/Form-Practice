@@ -1,48 +1,54 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import mongoose from "mongoose";
 import path from "path"
 import { fileURLToPath } from "url";
 import { User } from "./models/signupScema.js";
-import { body ,validationResult } from "express-validator";
-
+import { signupValidate } from "./validators/signupValidator.js";
+import ratelimit from "express-rate-limit";
+import cors from "cors";
+import logger from "./logger.js";
 
 const app = express();
-const port = 3000;
+const port = process.env.HOST_PORT ;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
+app.use(cors(
+    {
+        origin:`http://localhost:${port}/`,
+        credentials:true
+    }
+))
+app.use((req, res, next) => {
+  logger.info(`Incoming request: ${req.method} ${req.url}`);
+  next();
+});
+const connect = await mongoose.connect(process.env.DB_URL);
 
-const connect = await mongoose.connect("mongodb://localhost:27017/users");
-app.post("/signup",  async (req, res) => {
+const fields = {}
+
+const signupLimiter = ratelimit({
+    windowMs:15 * 60 * 1000,
+    max:30,
+    message:{
+        success :false,
+        meassage : "Too many attemps.Please try agin later"
+    }
+})
+
+app.post("/signup", signupValidate, signupLimiter,async (req, res) => {
     try {
-        const fields = {}
-      const requiredFields = ["firstname", "lastname", "cCode", "number", "email", "password"];
-        for (const key of requiredFields) {
-            if (!req.body[key] || req.body[key].toString().trim() === "") {
-                fields[key] = `${key} is required`;
-            }
-        }
-        if (Object.keys(fields).length > 0) {
-            return res.status(400).json({ fields });
-        }
+
+        const { firstname, lastname, cCode, number, email, password } = req.body;
+
+        logger.info(`Signup attempt for email: ${email}`);
+
         const phone = `${cCode}${number}`;
-        if (phone.length < 8) {
-            fields.phoneNumber = "The Phone Number must be 8 characters long"
-        }
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            fields.email = "Invalid email.Please enter a valid email address"
-        }
-
-        const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,}$/;
-
-        if(!passRegex.test(password)){
-            fields.password = "Password must contain a lowercase letter , an uppercase letter , a digit and a special character and should be 8 characters long";
-        }
-
         const phoneUser = await User.findOne({ phoneNumber: phone }).select("phoneNumber");
         const emailUser = await User.findOne({ email: email }).select("email");
         // console.log(eUser)    
@@ -60,9 +66,9 @@ app.post("/signup",  async (req, res) => {
             email: email.toLowerCase().trim(),
             password: password
         })
-
-        return res.status(201).json( {
-            success:"Congratulations ! You have Successfully Signed Up"
+         logger.info(`User created successfully: ${email}`);
+        return res.status(201).json({
+            success: "Congratulations ! You have Successfully Signed Up"
         })
     } catch (error) {
         console.error(error)
@@ -90,6 +96,7 @@ app.post("/signup",  async (req, res) => {
 
         }
 
+            logger.error(`Signup failed for ${req.body.email}: ${error.message}`)
         return res.status(500).json({ error })
     }
 })
