@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+
+@layer components {
+    .option{
+        @apply w-full text-sm px-5 py-1 
+    }
+
+}

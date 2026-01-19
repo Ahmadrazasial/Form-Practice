@@ -1,25 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup / Login</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<form action="" id="signup">
-    <input type="text" name="first" id="first" class="name" placeholder="Firstname">
-    <input type="text" name="last" id="last" class="name" placeholder="Lastname">
-    <select name="Countrycode" id="code">
-        
-    </select>
-    <input type="number" name="number" id="phone" placeholder="phone">
-    <input type="email" name="email" id="email" placeholder="Email">
-    <input type="password" name="password" id="password" placeholder="Password">
-    <input type="password" name="confirm" id="confirm" placeholder="Confirm Password">
-    <button type="submit" id="submit">Submit</button>
-</form>
+
+<body >
+    <div class="container w-auto mx-auto border-2 border-amber-700">
+        <div class="formSection w-4/6 flex flex-col items-center border mx-auto gap-5 p-5">
+            <h1 class="text-4xl font-bold text-black ">Sign Up</h1>
+            <form action="" id="signup" class="w-full flex flex-col justify-center items-center gap-10">
+                <div class="field w-4/5 " id="firstSec">
+                <input type="text" name="first" id="first" class="name w-full border py-3 px-5 text-2xl rounded-2xl" placeholder="Firstname">
+                <span id="firsterror" class="errSpan text-sm text-red-600 "></span>
+                </div>
+                <div class="field w-4/5" id="lastSec">
+                <input type="text" name="last" id="last" class="name w-full border py-3 px-5 text-2xl rounded-2xl" placeholder="Lastname">
+                <span id="lasterror" class="errSpan text-sm text-red-600 "></span>
+                </div>
+                <div class="field w-4/5 flex border rounded-2xl" id="numberSec">
+                <select name="Countrycode" id="code" class="w-1/5 text-2xl px-5 rounded-2xl focus:outline-0">
+                    <option class="" value="" disabled selected hidden>
+                     Country
+                    </option>
+                </select>
+                <span id="codeerror"></span>
+                <input type="number" name="number" id="phone" placeholder="Phone" class="w-3/4 py-3 px-5  text-2xl rounded-r-2xl focus:outline-0">
+                <span id="numbererror" class="errSpan text-sm text-red-600 hidden"></span>
+                </div>
+                <div class="field w-4/5" id="emailSec">
+                <input type="email" name="email" id="email" placeholder="Email" class="w-full border py-3 px-5 text-2xl rounded-2xl">
+                <span id="emailerror" class="errSpan text-sm text-red-600 hidden"></span>
+                </div>
+                <div class="field w-4/5" id="passwordSec">
+                <input type="password" name="password" id="password" placeholder="Password" class="w-full border py-3 px-5 text-2xl rounded-2xl ">
+                <span id="passerror" class="errSpan text-sm text-red-600 hidden"></span>
+                </div>
+                <div class="field w-4/5" id="confirmSec">
+                <input type="password" name="confirm" id="confirm" placeholder="Confirm Password" class="w-full border py-3 px-5 text-2xl rounded-2xl">
+                <span id="cnfmerror" class="errSpan text-sm text-red-600 hidden"></span>
+                </div>
+                <button type="submit" id="submit" class="w-4/5 border py-3 px-5 text-2xl font-bold
+                 rounded-2xl cursor-pointer bg-emerald-700 text-white">Submit</button>
+            </form>
+        </div>
+    </div>
 
     <script src="script.js"></script>
     <!-- <script src="../index.js"></script> -->
 </body>
+
 </html>
