@@ -333,34 +333,34 @@ async function formApi() {
             if(obj){
 
                 Object.assign(serverErrors,obj);
-        //    for (const key in obj) {
-        //     const element = obj[key];
-        //      if(key === "phoneNumber") clearErr(Phone)
-        //         if(key === "email") clearErr(Email)
-        //     if(key === "phoneNumber"){
+           for (const key in obj) {
+            const element = obj[key];
+             if(key === "phoneNumber") clearErr(Phone)
+                if(key === "email") clearErr(Email)
+            if(key === "phoneNumber"){
 
-        //         showErr(Phone,element);
+                showErr(Phone,element);
                 
-        //     }
-        //     if(key === "email"){
-        //         showErr(Email,element);
+            }
+            if(key === "email"){
+                showErr(Email,element);
                 
-        //     }
-        //    }
-        for (const key in obj) {
-    const element = obj[key];
+            }
+           }
+//         for (const key in obj) {
+//     const element = obj[key];
 
-    // Map server field keys to input elements
-    const inputMap = {
-        phoneNumber: Phone,
-        email: Email
-    };
+//     // Map server field keys to input elements
+//     const inputMap = {
+//         phoneNumber: Phone,
+//         email: Email
+//     };
 
-    const input = inputMap[key];
-    if (input) {
-        showErr(input, element);
-    }
-}
+//     const input = inputMap[key];
+//     if (input) {
+//         showErr(input, element);
+//     }
+// }
 
            return;
         }

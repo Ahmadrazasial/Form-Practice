@@ -469,3 +469,14 @@
 [2026-01-20 17:01:82] INFO : Incoming request: POST /signup
 [2026-01-20 17:01:82] INFO : Signup attempt for email: asial515@gmail.com
 [2026-01-20 17:01:91] INFO : User created successfully: asial515@gmail.com
+[2026-01-20 17:01:26] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-01-20 17:01:90] INFO : Incoming request: POST /signup
+[2026-01-20 17:01:91] INFO : Signup attempt for email: asial6445@gmail.com
+[2026-01-20 17:01:41] INFO : Incoming request: POST /signup
+[2026-01-20 17:01:41] INFO : Signup attempt for email: asial5252@gmail.com
+[2026-01-20 17:01:51] INFO : User created successfully: asial5252@gmail.com
+[2026-01-20 17:01:22] INFO : Incoming request: POST /signup
+[2026-01-20 17:01:22] INFO : Signup attempt for email: asial522@gmail.com
+[2026-01-20 17:01:78] INFO : Incoming request: POST /signup
+[2026-01-20 17:01:79] INFO : Signup attempt for email: asial522@gmail.com
+[2026-01-20 17:01:88] INFO : User created successfully: asial522@gmail.com
