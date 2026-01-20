@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 });
 const connect = await mongoose.connect(process.env.DB_URL);
 
-const fields = {}
+
 
 const signupLimiter = ratelimit({
     windowMs:15 * 60 * 1000,
@@ -43,6 +43,7 @@ const signupLimiter = ratelimit({
 
 app.post("/signup", signupValidate, signupLimiter,async (req, res) => {
     try {
+        const fields = {}
 
         const { firstname, lastname, cCode, number, email, password } = req.body;
 
@@ -50,7 +51,7 @@ app.post("/signup", signupValidate, signupLimiter,async (req, res) => {
 
         const phone = `${cCode}${number}`;
         const phoneUser = await User.findOne({ phoneNumber: phone }).select("phoneNumber");
-        const emailUser = await User.findOne({ email: email }).select("email");
+        const emailUser = await User.findOne({ email: email.toLowerCase().trim()}).select("email");
         // console.log(eUser)    
         if (phoneUser) fields.phoneNumber = "Phone number already exists";
         if (emailUser) fields.email = "Email already exists"

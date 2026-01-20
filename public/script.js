@@ -162,42 +162,154 @@ countryPhoneCodes.forEach(code => {
 })
 
 const requiredFields = [Firstname, Lastname, Countrycode, Phone, Email, Password, Confirm];
-async function Validate() {
 
-    requiredFields.forEach((field, index) => {
+function showErr(input,message){
+    const error = document.querySelector(`.errSpan[data-for="${input.id}"]`);
+    if(!error) return;
+    error.style.display = "block";
+    error.textContent = message;
 
-        if (field.value.trim() === "") {
-            errSpans[index].style.display = "block";
-            errSpans[index].textContent = "This field is required";
-        }else{
-            errSpans[index].textContent = "";
-        }
-    });
-
-    console.log(Countrycode)
-    // if (p.length < 8) {
-    //     fields.phoneNumber = "The Phone Number must be 8 characters long"
-    // }
-    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    // if (!emailRegex.test(email)) {
-    //     fields.email = "Invalid email.Please enter a valid email address"
-    // }
-
-    // const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,}$/;
-
-    // if(!passRegex.test(password)){
-    //     fields.password = "Password must contain a lowercase letter , an uppercase letter , a digit and a special character and should be 8 characters long";
-    // }
 }
-// Validate();
+
+function clearErr(input) {
+    const error = document.querySelector(`.errSpan[data-for="${input.id}"]`);
+    if(!error) return;
+    error.textContent = "";
+}
+
+function validatefn() {
+    if(Firstname.value.trim() === ""){
+        showErr(Firstname,"This field is required");
+        return false;
+    }
+    else{
+        clearErr(Firstname);
+        return true;
+    }
+}
+
+function validateln() {
+    if(Lastname.value.trim() === ""){
+        showErr(Lastname,"This field is required");
+        return false;
+    }
+    else{
+        clearErr(Lastname);
+        return true;
+    }
+}
+
+function validatecode() {
+    if(Countrycode.value.trim() === ""){
+        showErr(Countrycode,"This field is required");
+        return false;
+    }
+    else{
+        clearErr(Countrycode);
+        return true;
+    }
+}
+function validateNumber() {
+    if(Phone.value.trim() === ""){
+        showErr(Phone,"This field is required");
+        return false;
+    }
+    if(Phone.value.length < 6){
+        showErr(Phone,"Phone Number must be 7 digits long");
+        return false;
+    }
+    else{
+        clearErr(Phone);
+        return true;
+    }
+}
+
+function validateEmail() {
+   const email = Email.value.trim()
+    if(email === ""){
+        showErr(Email,"This field is required");
+        return false;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        showErr(Email,"Invalid email.Please enter a valid email address");
+        return false;
+    }
+    else{
+        clearErr(Email);
+        return true;
+    }
+}
+function validatePassword() {
+    const password = Password.value.trim()
+    if(password === ""){
+        showErr(Password,"This field is required");
+        return false;
+    }
+    const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,}$/;
+    if (!passRegex.test(password)) {
+        showErr(Password,"Password must contain a lowecase letter , an uppercase letter, a number, a symbol and must be 8 characters long");
+        return false;
+    }
+    else{
+        clearErr(Password);
+        return true;
+    }
+}
+function validateConfirm() {
+    const confirm  = Confirm.value.trim()
+    const password = Password.value.trim()
+    if(confirm === ""){
+        showErr(Confirm,"This field is required");
+        return false;
+    }
+    const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,}$/;
+    if (!passRegex.test(confirm)) {
+        showErr(Confirm,"Password must contain a lowecase letter , an uppercase letter, a number, a symbol and must be 8 characters long");
+        return false;
+    }
+    if(password !== confirm){
+        showErr(Confirm,"Passwords do not match");
+        return false
+    }
+    else{
+        clearErr(Confirm);
+        return true;
+    }
+}
+
+const serverErrors = {};
+
+const validationArr = [validatefn,validateln,validatecode,validateNumber,validateEmail,validatePassword,validateConfirm];
+function Validate() {
+  
+    return validationArr.map(field => field()).every(Boolean);
+}
+
+
+
+requiredFields.forEach((field,index)=>{
+    field.addEventListener("input",()=>{
+        clearErr(field);
+        
+        if(serverErrors && serverErrors[field.id]) {
+            delete serverErrors[field.id];
+        };
+        validationArr[index]();
+
+
+    })
+})
 
 let submit = document.getElementById("submit");
 
 async function formApi() {
     const signupform = document.getElementById("signup");
     signupform.addEventListener("submit", async (e) => {
-        e.preventDefault()
-        Validate();
+        e.preventDefault();
+        if(!Validate()){
+        return
+        }
         const formdata = {
             firstname: signupform.first.value,
             lastname: signupform.last.value,
@@ -215,13 +327,49 @@ async function formApi() {
                 }
             )
             const data = await res.json();
-            // console.log(formdata.cCode)
-            // alert(data);
+            console.log(data)
+            
+            const obj = data.fields;
+            if(obj){
 
+                Object.assign(serverErrors,obj);
+        //    for (const key in obj) {
+        //     const element = obj[key];
+        //      if(key === "phoneNumber") clearErr(Phone)
+        //         if(key === "email") clearErr(Email)
+        //     if(key === "phoneNumber"){
+
+        //         showErr(Phone,element);
+                
+        //     }
+        //     if(key === "email"){
+        //         showErr(Email,element);
+                
+        //     }
+        //    }
+        for (const key in obj) {
+    const element = obj[key];
+
+    // Map server field keys to input elements
+    const inputMap = {
+        phoneNumber: Phone,
+        email: Email
+    };
+
+    const input = inputMap[key];
+    if (input) {
+        showErr(input, element);
+    }
+}
+
+           return;
+        }
         } catch (error) {
             console.error("Error", error)
         }
+        
     })
+
 }
 
 

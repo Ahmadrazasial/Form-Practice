@@ -15,11 +15,11 @@
             <form action="" id="signup" class="w-full flex flex-col justify-center items-center gap-10">
                 <div class="field w-4/5 " id="firstSec">
                 <input type="text" name="first" id="first" class="name w-full border py-3 px-5 text-2xl rounded-2xl" placeholder="Firstname">
-                <span id="firsterror" class="errSpan text-sm text-red-600 "></span>
+                <span id="firsterror" class="errSpan text-sm text-red-600 " data-for="first"></span>
                 </div>
                 <div class="field w-4/5" id="lastSec">
                 <input type="text" name="last" id="last" class="name w-full border py-3 px-5 text-2xl rounded-2xl" placeholder="Lastname">
-                <span id="lasterror" class="errSpan text-sm text-red-600 "></span>
+                <span id="lasterror" class="errSpan text-sm text-red-600 " data-for="last"></span>
                 </div>
                 <div class="field w-4/5 flex border rounded-2xl" id="numberSec">
                 <select name="Countrycode" id="code" class="w-1/5 text-2xl px-5 rounded-2xl focus:outline-0">
@@ -27,21 +27,22 @@
                      Country
                     </option>
                 </select>
-                <span id="codeerror"></span>
+                
                 <input type="number" name="number" id="phone" placeholder="Phone" class="w-3/4 py-3 px-5  text-2xl rounded-r-2xl focus:outline-0">
-                <span id="numbererror" class="errSpan text-sm text-red-600 hidden"></span>
+                <span id="codeerror" class="errSpan text-sm text-red-600 hidden"data-for="code"></span>
+                <span id="numbererror" class="errSpan text-sm text-red-600 hidden" data-for="phone"></span>
                 </div>
                 <div class="field w-4/5" id="emailSec">
                 <input type="email" name="email" id="email" placeholder="Email" class="w-full border py-3 px-5 text-2xl rounded-2xl">
-                <span id="emailerror" class="errSpan text-sm text-red-600 hidden"></span>
+                <span id="emailerror" class="errSpan text-sm text-red-600 hidden" data-for="email"></span>
                 </div>
                 <div class="field w-4/5" id="passwordSec">
                 <input type="password" name="password" id="password" placeholder="Password" class="w-full border py-3 px-5 text-2xl rounded-2xl ">
-                <span id="passerror" class="errSpan text-sm text-red-600 hidden"></span>
+                <span id="passerror" class="errSpan text-sm text-red-600 hidden" data-for="password"></span>
                 </div>
                 <div class="field w-4/5" id="confirmSec">
                 <input type="password" name="confirm" id="confirm" placeholder="Confirm Password" class="w-full border py-3 px-5 text-2xl rounded-2xl">
-                <span id="cnfmerror" class="errSpan text-sm text-red-600 hidden"></span>
+                <span id="cnfmerror" class="errSpan text-sm text-red-600 hidden" data-for="confirm"></span>
                 </div>
                 <button type="submit" id="submit" class="w-4/5 border py-3 px-5 text-2xl font-bold
                  rounded-2xl cursor-pointer bg-emerald-700 text-white">Submit</button>
