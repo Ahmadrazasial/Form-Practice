@@ -45,6 +45,8 @@ app.post("/signup", signupValidate, signupLimiter,async (req, res) => {
     try {
         const fields = {}
 
+        // await User.deleteMany();
+
         const { firstname, lastname, cCode, number, email, password } = req.body;
 
         logger.info(`Signup attempt for email: ${email}`);
@@ -57,7 +59,10 @@ app.post("/signup", signupValidate, signupLimiter,async (req, res) => {
         if (emailUser) fields.email = "Email already exists"
 
         if (Object.keys(fields).length > 0) {
-            return res.status(400).json({ fields });
+            return res.status(400).json({ 
+                success:false,
+                fields
+             });
         }
 
         await User.create({
@@ -69,7 +74,8 @@ app.post("/signup", signupValidate, signupLimiter,async (req, res) => {
         })
          logger.info(`User created successfully: ${email}`);
         return res.status(201).json({
-            success: "Congratulations ! You have Successfully Signed Up"
+            success: true,
+            message:"Congratulations ! You have Successfully Signed Up"
         })
     } catch (error) {
         console.error(error)
@@ -81,6 +87,7 @@ app.post("/signup", signupValidate, signupLimiter,async (req, res) => {
                 errors[input] = error.errors[input].message;
             })
             return res.status(400).json({
+                success:false,
                 errors
             }
             )
@@ -90,6 +97,7 @@ app.post("/signup", signupValidate, signupLimiter,async (req, res) => {
             const errors = {}
             errors[field] = `${field} already exists`
             return res.status(400).json({
+                success:false,
                 errors
             }
 
@@ -98,7 +106,9 @@ app.post("/signup", signupValidate, signupLimiter,async (req, res) => {
         }
 
             logger.error(`Signup failed for ${req.body.email}: ${error.message}`)
-        return res.status(500).json({ error })
+        return res.status(500).json({ 
+            success:false,
+            error })
     }
 })
 
