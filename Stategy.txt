@@ -1,0 +1,47 @@
+⚠️ STRONGLY RECOMMENDED
+
+Race-condition safety (rely on DB unique index, not only findOne)
+
+Input validation (email format, phone format)
+
+Clear error messages per field
+
+Consistent HTTP status codes (400, 409, 201)
+
+Limit selected fields when querying users
+
+🔐 SECURITY HARDENING
+
+Password strength rules (numbers, symbols, etc.)
+
+Rate limiting (prevent spam signup)
+
+Hide stack traces in production
+
+CORS configuration
+
+Helmet middleware
+
+🚀 NEXT FEATURES (After Signup)
+
+Login endpoint
+
+bcrypt.compare for login
+
+JWT authentication
+
+Protected routes
+
+Logout / token invalidation
+
+🧹 OPTIONAL QUALITY IMPROVEMENTS
+
+Centralized error handler
+
+Environment variables (dotenv)
+
+Request size limits
+
+Validation library (express-validator or zod)
+
+Account verification (email/SMS)

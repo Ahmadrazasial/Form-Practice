@@ -151,7 +151,7 @@ const Password = document.getElementById("password")
 const Confirm = document.getElementById("confirm")
 const formsSec = document.getElementById("formSec");
 const errSpans = document.querySelectorAll(".errSpan");
-// const phoneDiv = document.getElementById("fullNumber")
+const codeField = document.querySelector(".wraper")
 
 
 
@@ -162,6 +162,33 @@ countryPhoneCodes.forEach(code => {
     option.textContent = `${code.name} ${code.dial_code}`;
     Countrycode.append(option)
 })
+
+
+
+const codeDisplay = document.getElementById("codeDisplay");
+
+Countrycode.addEventListener("change", () => {
+    // const selected = Countrycode.selectedOptions[0];  
+    const selected = Countrycode.querySelector('option:checked');
+    if (selected) {
+        codeDisplay.textContent = selected.value + " ↓"
+        Countrycode.blur()
+    }
+})
+Countrycode.addEventListener("focus", () => {
+    Countrycode.value = "";
+})
+Countrycode.addEventListener("keydown", () => {
+    codeDisplay.textContent = "";
+})
+// const options = Countrycode.options
+// console.log(options)
+
+// Array.from(options).forEach((option) => {
+//     option.addEventListener("", () => {
+//         codeDisplay.textContent = ""
+//     })
+// })
 
 const requiredFields = [Firstname, Lastname, Countrycode, Phone, Email, Password, Confirm];
 
@@ -288,20 +315,20 @@ function successMs(msg) {
     greet.className = "greet";
     greet.src = "images/success.svg";
     const text = document.createElement("h3")
-    text.className = "text" ;
-     text.textContent = msg
+    text.className = "text";
+    text.textContent = msg
     const link = document.createElement("a")
     link.className = "redirect";
     link.textContent = "Continue"
 
-    link.addEventListener("click",(e)=>{
+    link.addEventListener("click", (e) => {
         e.preventDefault();
 
         successSec.remove();
 
         formsSec.style.display = "flex";
     })
-    successSec.append(greet,text,link);
+    successSec.append(greet, text, link);
     return successSec;
 }
 
@@ -317,14 +344,14 @@ function Validate() {
 
 requiredFields.forEach((field, index) => {
 
-    const phoneDiv = field.closest("#phoneDiv") || field.parentElement;
-    field.addEventListener("focus",(e)=>{
-    if(phoneDiv) phoneDiv.classList.add("outline");
-})
+    //     const phoneDiv = field.closest("#fullNumber") || field.parentElement
+    //  field.addEventListener("focus", (e) => {
+    //         if (phoneDiv) phoneDiv.classList.add("outline");
+    //     })
 
-field.addEventListener("blur",(e)=>{
-    if(phoneDiv) phoneDiv.classList.remove("outline");
-})
+    //     field.addEventListener("focusout", (e) => {
+    //         if (phoneDiv) phoneDiv.classList.remove("outline");
+    //     })  
 
     field.addEventListener("input", () => {
         clearErr(field);
@@ -339,6 +366,15 @@ field.addEventListener("blur",(e)=>{
     })
 })
 
+const phoneDiv = document.getElementById("fullNumber");
+
+phoneDiv.addEventListener("focusin", () => {
+    if (phoneDiv) phoneDiv.classList.add("outline");
+})
+
+phoneDiv.addEventListener("focusout", () => {
+    if (phoneDiv) phoneDiv.classList.remove("outline");
+})
 
 
 let submit = document.getElementById("submit");
