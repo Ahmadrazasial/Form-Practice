@@ -11,6 +11,17 @@
   appearance: none;
   background: transparent;
 }
-
-
+.country{
+    @apply flex w-full gap-3 items-center text-lg  cursor-pointer hover:bg-blue-100 py-2 px-3
 }
+.countryFlag{
+    @apply w-10 h-6
+}
+.countryName{
+    @apply text-lg
+}
+.countries{
+    scrollbar-width:thin;
+}
+}
+

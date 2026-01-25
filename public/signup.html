@@ -23,24 +23,27 @@
                         placeholder="Lastname">
                     <span id="lasterror" class="errSpan text-sm text-red-600 " data-for="last"></span>
                 </div>
-                <div class="field w-4/5 " id="numberSec">
-                    <div class="border rounded-2xl flex " id="fullNumber">
-                        <div class="wraper w-1/4 relative border-r-2 flex pr-3">
-                            <span class="dialCode absolute text-2xl text-center leading-12 w-[90%] h-full left-0  pointer-events-none  z-20" id="codeDisplay">
-                            Country  &darr;
+                <div class="field w-4/5 relative" id="numberSec">
+                    <div class="countries w-[300px] border h-0  flex visible opacity-0 flex-col overflow-y-scroll  absolute py-3 invisible  -top-0 bg-white z-30 transition-all ease-in "
+                        id="countries">
+
+                    </div>
+                    <div class="border rounded-2xl flex w-full" id="fullNumber">
+
+                        <!-- <div class="wraper w-1/6  "> -->
+                            <span
+                                class="userCountry w-1/6  text-2xl text-center flex items-center justify-center cursor-pointer  h-auto self-center z-20"
+                                id="userCountry">
+                                <img src="" alt="" id="countryFlag" class="w-10 h-6" data-iso=""> 
+                                &darr;
                             </span>
-                            <select name="Countrycode" id="code"
-                                class="select w-full px-3 h-full text-2xl text-transparent overflow-x-hidden z-10  focus:outline-0 focus:text-black">
-                                <option class="" value="" disabled selected hidden>
-                                    <!-- Country -->
-                                </option>
-                            </select>
-                        </div>
-                        <input type="number" name="phoneNumber" id="phone" placeholder="Phone"
-                            class="w-3/4 py-3 px-5  text-2xl rounded-r-2xl focus:outline-0">
+
+                        <!-- </div> -->
+                        <input type="tel" name="phoneNumber" id="phone" placeholder="Phone"
+                            class="w-5/6 py-3 px-5  text-2xl rounded-r-2xl focus:outline-0">
                     </div>
                     <div class=" flex gap-10">
-                        <span id="codeerror" class="errSpan text-sm text-red-600 hidden" data-for="code"></span>
+                        <span id="codeerror" class="errSpan text-sm text-red-600 hidden" data-for="countryFlag"></span>
                         <span id="numbererror" class="errSpan text-sm text-red-600 hidden" data-for="phone"></span>
                     </div>
                 </div>
