@@ -47,12 +47,11 @@ app.post("/signup", signupValidate, signupLimiter,async (req, res) => {
 
         // await User.deleteMany();
 
-        const { firstname, lastname, cCode, number, email, password } = req.body;
+        const { firstname, lastname, number, email, password } = req.body;
 
         logger.info(`Signup attempt for email: ${email}`);
 
-        const phone = `${cCode}${number}`;
-        const phoneUser = await User.findOne({ phoneNumber: phone }).select("phoneNumber");
+        const phoneUser = await User.findOne({ phoneNumber: number }).select("phoneNumber");
         const emailUser = await User.findOne({ email: email.toLowerCase().trim()}).select("email");
         // console.log(eUser)    
         if (phoneUser) fields.phoneNumber = "Phone number already exists";
@@ -68,7 +67,7 @@ app.post("/signup", signupValidate, signupLimiter,async (req, res) => {
         await User.create({
             firstname: firstname.trim(),
             lastname: lastname.trim(),
-            phoneNumber: phone.trim(),
+            phoneNumber: number.trim(),
             email: email.toLowerCase().trim(),
             password: password
         })

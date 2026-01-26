@@ -16,16 +16,11 @@ export const signupValidate = [
     escape(),
 
     //Country code
-    body("cCode").
-    trim().
-    notEmpty().
-    withMessage("Country code is required"),
 
     //Phone Number
     body("number").
     trim().
     notEmpty().withMessage("Phone number is required").
-    isNumeric().withMessage("Phone must contain only digits").
     isLength(6).withMessage("Phone number must be 7 digits long"),
 
     //Email

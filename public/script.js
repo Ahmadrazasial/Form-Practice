@@ -10,71 +10,109 @@ const Confirm = document.getElementById("confirm")
 const formsSec = document.getElementById("formSec");
 const errSpans = document.querySelectorAll(".errSpan");
 const countryList = document.getElementById("countries");
-const countries = document.querySelectorAll(".country");
 const userFlag = document.getElementById("countryFlag")
 const flagImg = document.getElementById("countryFlag");
 
 
 (async function () {
-    const API = await fetch("https://restcountries.com/v3.1/all?fields=name,flags,idd,cca2")
-    const apiData = await API.json()
-    apiData.forEach(country => {
-        const div = document.createElement("div");
-        div.className = "country";
-        div.id = "country";
-        div.dataset.iso = country.cca2
-        div.dataset.name = country.name.common;
-        div.dataset.dial = country.idd.root + (country.idd.suffixes?.[0] || "");
-        div.dataset.flag = country.flags.svg;
-        const countryflag = document.createElement("img")
-        countryflag.className = "countryFlag";
-        countryflag.src = country.flags.svg;
-        const countryName = document.createElement("span")
-        countryName.className = "countryName";
-        countryName.textContent = country.name.common;
-        countryName.dataset = country.name.common;
-        const countryDial = document.createElement("span")
-        countryDial.className = "countryDial";
-        countryDial.textContent = country.idd.root + (country.idd.suffixes?.[0] || "");
-        div.append(countryflag, countryName, countryDial)
-        countryList.append(div)
-        // console.log(country.idd)
-    })
+    try {
+        const API = await fetch("https://restcountries.com/v3.1/all?fields=name,flags,idd,cca2")
+        const apiData = await API.json()
+        apiData.forEach(country => {
+            const div = document.createElement("div");
+            div.className = "country";
+            div.dataset.iso = country.cca2
+            div.dataset.name = country.name.common;
+            div.dataset.dial = country.idd.root + (country.idd.suffixes?.[0] || "");
+            div.dataset.flag = country.flags.svg;
+            const countryflag = document.createElement("img")
+            countryflag.className = "countryFlag";
+            countryflag.src = country.flags.svg;
+            const countryName = document.createElement("span")
+            countryName.className = "countryName";
+            countryName.textContent = country.name.common;
+            countryName.dataset = country.name.common;
+            const countryDial = document.createElement("span")
+            countryDial.className = "countryDial";
+            countryDial.textContent = country.idd.root + (country.idd.suffixes?.[0] || "");
+            div.append(countryflag, countryName, countryDial)
+            countryList.append(div)
+            // console.log(country.idd)
+        })
+    } catch (error) {
+        console.log("Err", error)
+    }
 })()
 
-userCountry.addEventListener("click",(e)=>{
-    countryList.classList.replace("h-0","h-[60vh]")
-    countryList.classList.replace("-top-0","-top-56")
+
+userCountry.addEventListener("click", (e) => {
+    countryList.classList.replace("h-0", "h-[60vh]")
+    countryList.classList.replace("-top-0", "-top-56")
     countryList.classList.remove("opacity-0")
 })
 
-window.addEventListener("click",(e)=>{
-    if(!countryList.contains(e.target) && !userCountry.contains(e.target)){
-        countryList.classList.replace("h-[60vh]","h-0")
-    countryList.classList.replace("-top-56","-top-0")
-    countryList.classList.add("opacity-0")
+window.addEventListener("click", (e) => {
+    if (!countryList.contains(e.target) && !userCountry.contains(e.target)) {
+        countryList.classList.replace("h-[60vh]", "h-0")
+        countryList.classList.replace("-top-56", "-top-0")
+        countryList.classList.add("opacity-0")
     }
 })
 
-countryList.addEventListener("click",(e)=>{
+let selectedCountry = {
+    iso: null,
+    dial: null,
+    flag: null,
+}
+
+function showCountry(s, i, p, d) {
+    if (!s || !i || !d || !p) return;
+    userFlag.src = s
+    userFlag.dataset.iso = i
+    const local = p.value.replace(/^\+\d+\s*/, "");
+    p.value = `${d} ${local}`;
+}
+
+countryList.addEventListener("click", (e) => {
     const item = e.target.closest(".country")
-    if(!item) return;
-    userFlag.src = item.dataset.flag
-    userFlag.dataset.iso = item.dataset.iso
-    const selectedDial = item.dataset.dial;
-    const local = Phone.value.replace(/^\+\d+\s*/, "");
-    Phone.value = `${item.dataset.dial} ${local}`;
-    Phone.value = selectedDial + " " + local;
-    countryList.classList.replace("h-[60vh]","h-0")
-    countryList.classList.replace("-top-56","-top-0")
+    if (!item) return;
+    selectedCountry = {
+        iso: item.dataset.iso,
+        dial: item.dataset.dial,
+        flag: item.dataset.flag,
+    }
+    showCountry(selectedCountry.flag, selectedCountry.iso, Phone, selectedCountry.dial);
+    countryList.classList.replace("h-[60vh]", "h-0")
+    countryList.classList.replace("-top-56", "-top-0")
     countryList.classList.add("opacity-0")
+    clearErr(userCountry)
 })
 
-// async function setDial(country_code) {
-//     const ip = await fetch('https://ipwho.is')
-//     const res = await ip.json();
-//     console.log(res)
-// }
+async function setDial() {
+    try {
+        const ip = await fetch('https://ipwho.is')
+        const res = await ip.json();
+        const country = res.country_code.trim();
+        const countries = document.querySelector(".countries").querySelectorAll(".country");
+
+        countries.forEach((mulk) => {
+            if (mulk.dataset.iso.toUpperCase() === country) {
+                const iso = mulk.dataset.iso;
+                const flag = mulk.dataset.flag
+                const dial = mulk.dataset.dial
+                showCountry(flag, iso, Phone, dial)
+            }
+            return;
+        })
+    } catch (error) {
+        console.log("Error ", error)
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    setDial();
+})
+
 
 const requiredFields = [Firstname, Lastname, userCountry, Phone, Email, Password, Confirm];
 
@@ -117,12 +155,12 @@ function validateln() {
 function validatecode() {
     const flagImg = document.getElementById("countryFlag");
     console.log(flagImg);
-    if (flagImg.dataset.iso === " ") {
-        showErr(flagImg.parentElement, "This field is required");
+    if (!flagImg.dataset.iso) {
+        showErr(userCountry, "This field is required");
         return false;
     }
     else {
-        clearErr(flagImg.parentElement);
+        clearErr(userCountry);
         return true;
     }
 }
@@ -204,7 +242,7 @@ function successMs(msg) {
     greet.src = "images/success.svg";
     const text = document.createElement("h3")
     text.className = "text";
-    text.textContent = msg
+    text.textContent = msg || "Success";
     const link = document.createElement("a")
     link.className = "redirect";
     link.textContent = "Continue"
@@ -227,30 +265,14 @@ function Validate() {
 
     return validationArr.map(field => field()).every(Boolean);
 }
-
-
-
 requiredFields.forEach((field, index) => {
-
-    //     const phoneDiv = field.closest("#fullNumber") || field.parentElement
-    //  field.addEventListener("focus", (e) => {
-    //         if (phoneDiv) phoneDiv.classList.add("outline");
-    //     })
-
-    //     field.addEventListener("focusout", (e) => {
-    //         if (phoneDiv) phoneDiv.classList.remove("outline");
-    //     })  
 
     field.addEventListener("input", () => {
         clearErr(field);
-
         if (serverErrors && serverErrors[field.name]) {
             delete serverErrors[field.name];
         };
         validationArr[index]();
-
-
-
     })
 })
 
@@ -277,7 +299,6 @@ async function formApi() {
         const formdata = {
             firstname: signupform.first.value,
             lastname: signupform.last.value,
-            cCode: signupform.code.value,
             number: signupform.phone.value,
             email: signupform.email.value,
             password: signupform.password.value
