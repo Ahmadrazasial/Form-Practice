@@ -105,6 +105,7 @@ async function setDial() {
             return;
         })
     } catch (error) {
+        
         console.log("Error ", error)
     }
 }
@@ -269,9 +270,9 @@ requiredFields.forEach((field, index) => {
 
     field.addEventListener("input", () => {
         clearErr(field);
-        if (serverErrors && serverErrors[field.name]) {
-            delete serverErrors[field.name];
-        };
+        // if (serverErrors && serverErrors[field.name]) {
+        //     delete serverErrors[field.name];
+        // };
         validationArr[index]();
     })
 })
