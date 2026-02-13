@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login now</title>
+</head>
+<body>
+    <div class="container w-auto mx-auto border-2 border-amber-700">
+        <div class="formSection w-4/6 flex flex-col items-center border mx-auto gap-5 p-5" id="formSec">
+            <h1 class="text-4xl font-bold text-black ">Log in</h1>
+            <form action="" id="signup" class="w-full flex flex-col justify-center items-center gap-10">
+                <div class="field w-4/5" id="emailSec">
+                    <input type="email" name="email" id="email" placeholder="Email"
+                        class="w-full border py-3 px-5 text-2xl rounded-2xl">
+                    <span id="emailerror" class="errSpan text-sm text-red-600 hidden" data-for="email"></span>
+                </div>
+                <div class="field w-4/5" id="passwordSec">
+                    <input type="password" name="password" id="password" placeholder="Password"
+                        class="w-full border py-3 px-5 text-2xl rounded-2xl ">
+                    <span id="passerror" class="errSpan text-sm text-red-600 hidden" data-for="password"></span>
+                </div>
+                <button type="submit" id="submit" class="w-4/5 border py-3 px-5 text-2xl font-bold
+                 rounded-2xl cursor-pointer bg-emerald-700 text-white">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
