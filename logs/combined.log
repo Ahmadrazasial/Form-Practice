@@ -1143,3 +1143,7 @@
 [2026-02-12 16:02:75] INFO : Incoming request: POST /signup
 [2026-02-12 16:02:76] INFO : Signup attempt for email: asial24@gmail.com
 [2026-02-12 16:02:85] INFO : User created successfully: asial24@gmail.com
+[2026-03-06 16:03:25] INFO : Incoming request: GET /favicon.ico
+[2026-03-06 16:03:98] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-03-06 16:03:25] INFO : Incoming request: GET /logim.html
+[2026-03-06 16:03:15] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json

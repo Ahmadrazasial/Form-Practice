@@ -7,7 +7,8 @@ const Phone = document.getElementById("phone")
 const Email = document.getElementById("email")
 const Password = document.getElementById("password")
 const Confirm = document.getElementById("confirm")
-const formsSec = document.getElementById("formSec");
+const spformsSec = document.getElementById("spformSec");
+const lgformsSec = document.getElementById("lgformSec");
 const errSpans = document.querySelectorAll(".errSpan");
 const countryList = document.getElementById("countries");
 const userFlag = document.getElementById("countryFlag")
@@ -288,9 +289,9 @@ phoneDiv.addEventListener("focusout", () => {
 })
 
 
-let submit = document.getElementById("submit");
+let submit = document.getElementById("signupSubmit");
 
-async function formApi() {
+async function signupApi() {
     const signupform = document.getElementById("signup");
     signupform.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -339,7 +340,7 @@ async function formApi() {
             }
             const message = data.message;
             console.log(message);
-            formsSec.style.display = "none";
+            spformsSec.style.display = "none";
             formsSec.parentElement.append(successMs(message))
         } catch (error) {
             console.error("Error", error)
@@ -351,3 +352,11 @@ async function formApi() {
 
 formApi()
 
+async function loginApi() {
+    let loginForm = document.getElementById
+    try {
+        
+    } catch (error) {
+        
+    }
+}
