@@ -1,5 +1,3 @@
-
-
 const Firstname = document.getElementById("first")
 const Lastname = document.getElementById("last")
 const userCountry = document.getElementById("userCountry");
@@ -13,7 +11,7 @@ const errSpans = document.querySelectorAll(".errSpan");
 const countryList = document.getElementById("countries");
 const userFlag = document.getElementById("countryFlag")
 const flagImg = document.getElementById("countryFlag");
-
+// console.log(lgformsSec)
 
 (async function () {
     try {
@@ -37,7 +35,9 @@ const flagImg = document.getElementById("countryFlag");
             countryDial.className = "countryDial";
             countryDial.textContent = country.idd.root + (country.idd.suffixes?.[0] || "");
             div.append(countryflag, countryName, countryDial)
+            if(countryList){
             countryList.append(div)
+            }
             // console.log(country.idd)
         })
     } catch (error) {
@@ -45,20 +45,24 @@ const flagImg = document.getElementById("countryFlag");
     }
 })()
 
-
+if (userCountry) {
 userCountry.addEventListener("click", (e) => {
     countryList.classList.replace("h-0", "h-[60vh]")
     countryList.classList.replace("-top-0", "-top-56")
     countryList.classList.remove("opacity-0")
 })
+}
+
 
 window.addEventListener("click", (e) => {
+    if (!countryList || !userCountry) return;
+
     if (!countryList.contains(e.target) && !userCountry.contains(e.target)) {
-        countryList.classList.replace("h-[60vh]", "h-0")
-        countryList.classList.replace("-top-56", "-top-0")
-        countryList.classList.add("opacity-0")
+        countryList.classList.replace("h-[60vh]", "h-0");
+        countryList.classList.replace("-top-56", "-top-0");
+        countryList.classList.add("opacity-0");
     }
-})
+});
 
 let selectedCountry = {
     iso: null,
@@ -74,6 +78,7 @@ function showCountry(s, i, p, d) {
     p.value = `${d} ${local}`;
 }
 
+if(countryList){
 countryList.addEventListener("click", (e) => {
     const item = e.target.closest(".country")
     if (!item) return;
@@ -88,11 +93,12 @@ countryList.addEventListener("click", (e) => {
     countryList.classList.add("opacity-0")
     clearErr(userCountry)
 })
-
+}
 async function setDial() {
     try {
         const ip = await fetch('https://ipwho.is')
         const res = await ip.json();
+        console.log(res)
         const country = res.country_code.trim();
         const countries = document.querySelector(".countries").querySelectorAll(".country");
 
@@ -112,7 +118,9 @@ async function setDial() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    if(document.getElementById("signup")){
     setDial();
+    }
 })
 
 
@@ -264,11 +272,11 @@ const serverErrors = {};
 
 const validationArr = [validatefn, validateln, validatecode, validateNumber, validateEmail, validatePassword, validateConfirm];
 function Validate() {
-
     return validationArr.map(field => field()).every(Boolean);
 }
-requiredFields.forEach((field, index) => {
 
+requiredFields.filter(Boolean).forEach((field, index) => {
+if (!field) return;
     field.addEventListener("input", () => {
         clearErr(field);
         // if (serverErrors && serverErrors[field.name]) {
@@ -280,6 +288,9 @@ requiredFields.forEach((field, index) => {
 
 const phoneDiv = document.getElementById("fullNumber");
 
+if (phoneDiv) {
+    
+
 phoneDiv.addEventListener("focusin", () => {
     if (phoneDiv) phoneDiv.classList.add("outline");
 })
@@ -287,12 +298,13 @@ phoneDiv.addEventListener("focusin", () => {
 phoneDiv.addEventListener("focusout", () => {
     if (phoneDiv) phoneDiv.classList.remove("outline");
 })
-
+}
 
 let submit = document.getElementById("signupSubmit");
 
 async function signupApi() {
     const signupform = document.getElementById("signup");
+    if(signupform){
     signupform.addEventListener("submit", async (e) => {
         e.preventDefault();
         if (!Validate()) {
@@ -341,22 +353,35 @@ async function signupApi() {
             const message = data.message;
             console.log(message);
             spformsSec.style.display = "none";
-            formsSec.parentElement.append(successMs(message))
+            spformsSec.parentElement.append(successMs(message))
         } catch (error) {
             console.error("Error", error)
         }
 
     })
-
+    }
 }
 
-formApi()
+signupApi()
+
+
 
 async function loginApi() {
-    let loginForm = document.getElementById
-    try {
+    let loginForm = document.getElementById("login");
+    if(loginForm){
+    loginForm.addEventListener("submit",async(e)=>{
+        e.preventDefault();
+console.log(loginForm);
+
+        try {
         
     } catch (error) {
         
     }
+    })
+    
 }
+}
+
+loginApi()
+console.log("connected")
