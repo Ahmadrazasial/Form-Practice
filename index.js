@@ -111,6 +111,16 @@ app.post("/signup", signupValidate, signupLimiter,async (req, res) => {
     }
 })
 
+app.post("/login",signupValidate ,async(req,res)=>{
+    try {
+        const { email , password } = req.body;
+
+        
+    } catch (error) {
+        
+    }
+})
+
 app.listen(port, () => {
     console.log(`Server running on ${port}`);
 })

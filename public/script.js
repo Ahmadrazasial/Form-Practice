@@ -1,3 +1,5 @@
+// import { Console } from "winston/lib/winston/transports";
+
 const Firstname = document.getElementById("first")
 const Lastname = document.getElementById("last")
 const userCountry = document.getElementById("userCountry");
@@ -35,8 +37,8 @@ const flagImg = document.getElementById("countryFlag");
             countryDial.className = "countryDial";
             countryDial.textContent = country.idd.root + (country.idd.suffixes?.[0] || "");
             div.append(countryflag, countryName, countryDial)
-            if(countryList){
-            countryList.append(div)
+            if (countryList) {
+                countryList.append(div)
             }
             // console.log(country.idd)
         })
@@ -46,11 +48,11 @@ const flagImg = document.getElementById("countryFlag");
 })()
 
 if (userCountry) {
-userCountry.addEventListener("click", (e) => {
-    countryList.classList.replace("h-0", "h-[60vh]")
-    countryList.classList.replace("-top-0", "-top-56")
-    countryList.classList.remove("opacity-0")
-})
+    userCountry.addEventListener("click", (e) => {
+        countryList.classList.replace("h-0", "h-[60vh]")
+        countryList.classList.replace("-top-0", "-top-56")
+        countryList.classList.remove("opacity-0")
+    })
 }
 
 
@@ -78,21 +80,21 @@ function showCountry(s, i, p, d) {
     p.value = `${d} ${local}`;
 }
 
-if(countryList){
-countryList.addEventListener("click", (e) => {
-    const item = e.target.closest(".country")
-    if (!item) return;
-    selectedCountry = {
-        iso: item.dataset.iso,
-        dial: item.dataset.dial,
-        flag: item.dataset.flag,
-    }
-    showCountry(selectedCountry.flag, selectedCountry.iso, Phone, selectedCountry.dial);
-    countryList.classList.replace("h-[60vh]", "h-0")
-    countryList.classList.replace("-top-56", "-top-0")
-    countryList.classList.add("opacity-0")
-    clearErr(userCountry)
-})
+if (countryList) {
+    countryList.addEventListener("click", (e) => {
+        const item = e.target.closest(".country")
+        if (!item) return;
+        selectedCountry = {
+            iso: item.dataset.iso,
+            dial: item.dataset.dial,
+            flag: item.dataset.flag,
+        }
+        showCountry(selectedCountry.flag, selectedCountry.iso, Phone, selectedCountry.dial);
+        countryList.classList.replace("h-[60vh]", "h-0")
+        countryList.classList.replace("-top-56", "-top-0")
+        countryList.classList.add("opacity-0")
+        clearErr(userCountry)
+    })
 }
 async function setDial() {
     try {
@@ -112,14 +114,14 @@ async function setDial() {
             return;
         })
     } catch (error) {
-        
+
         console.log("Error ", error)
     }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    if(document.getElementById("signup")){
-    setDial();
+    if (document.getElementById("signup")) {
+        setDial();
     }
 })
 
@@ -276,7 +278,7 @@ function Validate() {
 }
 
 requiredFields.filter(Boolean).forEach((field, index) => {
-if (!field) return;
+    if (!field) return;
     field.addEventListener("input", () => {
         clearErr(field);
         // if (serverErrors && serverErrors[field.name]) {
@@ -289,76 +291,76 @@ if (!field) return;
 const phoneDiv = document.getElementById("fullNumber");
 
 if (phoneDiv) {
-    
 
-phoneDiv.addEventListener("focusin", () => {
-    if (phoneDiv) phoneDiv.classList.add("outline");
-})
 
-phoneDiv.addEventListener("focusout", () => {
-    if (phoneDiv) phoneDiv.classList.remove("outline");
-})
+    phoneDiv.addEventListener("focusin", () => {
+        if (phoneDiv) phoneDiv.classList.add("outline");
+    })
+
+    phoneDiv.addEventListener("focusout", () => {
+        if (phoneDiv) phoneDiv.classList.remove("outline");
+    })
 }
 
 let submit = document.getElementById("signupSubmit");
 
 async function signupApi() {
     const signupform = document.getElementById("signup");
-    if(signupform){
-    signupform.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        if (!Validate()) {
-            return
-        }
-        const formdata = {
-            firstname: signupform.first.value,
-            lastname: signupform.last.value,
-            number: signupform.phone.value,
-            email: signupform.email.value,
-            password: signupform.password.value
-        }
-        try {
-            const res = await fetch("/signup",
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(formdata),
-                }
-            )
-            const data = await res.json();
-            console.log(data)
-
-
-
-            if (data.success === false) {
-                const obj = data.fields;
-                Object.assign(serverErrors, obj);
-
-                for (const key in obj) {
-                    const element = obj[key];
-
-                    // Map server field keys to input elements
-                    const inputMap = {
-                        phoneNumber: Phone,
-                        email: Email
-                    };
-
-                    const input = inputMap[key];
-                    if (input) {
-                        showErr(input, element);
-                    }
-                }
-                return;
+    if (signupform) {
+        signupform.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            if (!Validate()) {
+                return
             }
-            const message = data.message;
-            console.log(message);
-            spformsSec.style.display = "none";
-            spformsSec.parentElement.append(successMs(message))
-        } catch (error) {
-            console.error("Error", error)
-        }
+            const formdata = {
+                firstname: signupform.first.value,
+                lastname: signupform.last.value,
+                number: signupform.phone.value,
+                email: signupform.email.value,
+                password: signupform.password.value
+            }
+            try {
+                const res = await fetch("/signup",
+                    {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(formdata),
+                    }
+                )
+                const data = await res.json();
+                console.log(data)
 
-    })
+
+
+                if (data.success === false) {
+                    const obj = data.fields;
+                    Object.assign(serverErrors, obj);
+
+                    for (const key in obj) {
+                        const element = obj[key];
+
+                        // Map server field keys to input elements
+                        const inputMap = {
+                            phoneNumber: Phone,
+                            email: Email
+                        };
+
+                        const input = inputMap[key];
+                        if (input) {
+                            showErr(input, element);
+                        }
+                    }
+                    return;
+                }
+                const message = data.message;
+                console.log(message);
+                spformsSec.style.display = "none";
+                spformsSec.parentElement.append(successMs(message))
+            } catch (error) {
+                console.error("Error", error)
+            }
+
+        })
     }
 }
 
@@ -368,19 +370,32 @@ signupApi()
 
 async function loginApi() {
     let loginForm = document.getElementById("login");
-    if(loginForm){
-    loginForm.addEventListener("submit",async(e)=>{
-        e.preventDefault();
-console.log(loginForm);
+    if (loginForm) {
+        loginForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            console.log(loginForm);
+            const formdata = {
+                email: loginForm.lgEmail.value,
+                password: loginForm.lgPassword.value
+            }
+            console.log(formdata)
+            try {
+                const res = await fetch("/login",
+                    {
+                        method: "POST",
+                        headers: { "Content-Type" : "application/json"},
+                        body: JSON.stringify(formdata)
+                    })
+                    const data = await res.json();
+                    console.log(data)
+                    
 
-        try {
-        
-    } catch (error) {
-        
+            } catch (error) {
+
+            }
+        })
+
     }
-    })
-    
-}
 }
 
 loginApi()
