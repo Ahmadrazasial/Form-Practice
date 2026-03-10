@@ -378,7 +378,7 @@ async function loginApi() {
                 email: loginForm.lgEmail.value,
                 password: loginForm.lgPassword.value
             }
-            console.log(formdata)
+            // console.log(formdata)
             try {
                 const res = await fetch("/login",
                     {

@@ -1,6 +1,6 @@
 import winston from "winston";
 import path from "path";
-import { error } from "console";
+// import { error } from "console";
 
 
 const logger = winston.createLogger({
@@ -13,7 +13,7 @@ const logger = winston.createLogger({
     ),
     transports:[
         // new winston.transports.Console(),
-        new winston.transports.File({filename:path.join("logs","error.log"),level:error}),
+        new winston.transports.File({filename:path.join("logs","error.log"),level:"error"}),
         new winston.transports.File({filename:path.join("logs","combined.log")})
     ]
 })

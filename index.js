@@ -111,7 +111,9 @@ app.post("/signup", signupValidate, signupLimiter,async (req, res) => {
     }
 })
 
-app.post("/login",signupValidate ,async(req,res)=>{
+import {loginValidator} from "./validators/loginvalidator.js";
+
+app.post("/login",loginValidator ,async(req,res)=>{
     try {
         const { email , password } = req.body;
 

@@ -1,6 +1,6 @@
 import { body ,validationResult } from "express-validator";
 
-export const signupValidate = [
+export  const signupValidate = [
     //firstname
     body("firstname").
     trim().
