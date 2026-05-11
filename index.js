@@ -117,6 +117,8 @@ app.post("/login",loginValidator ,async(req,res)=>{
     try {
         const { email , password } = req.body;
 
+        const useEmail = await User.find({})
+
         
     } catch (error) {
         

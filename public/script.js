@@ -8,12 +8,11 @@ const Email = document.getElementById("email")
 const Password = document.getElementById("password")
 const Confirm = document.getElementById("confirm")
 const spformsSec = document.getElementById("spformSec");
-const lgformsSec = document.getElementById("lgformSec");
 const errSpans = document.querySelectorAll(".errSpan");
 const countryList = document.getElementById("countries");
 const userFlag = document.getElementById("countryFlag")
 const flagImg = document.getElementById("countryFlag");
-// console.log(lgformsSec)
+// console.log(Email)
 
 (async function () {
     try {
@@ -367,12 +366,104 @@ async function signupApi() {
 signupApi()
 
 
+const loginForm = document.getElementById("login");
+
+const lgEmail = loginForm.querySelector("#lgemailSec");
+const lgPhone = loginForm.querySelector("#lgnumberSec")
+const lgPassword = loginForm.querySelector("#Password")
+const toggleBtn = loginForm.querySelector("#toggleBtn")
+console.log(loginForm)
+
+let mode = "email"
+function toggleMode() {
+
+
+    if (mode === "email") {
+        mode = "phone";
+        lgEmail.style.display = "none";
+        lgPhone.style.display = "block"
+
+        Email.value = "";
+        toggleBtn.innerText = "Login with email instead";
+    }
+    else {
+        mode = "email";
+        lgEmail.style.display = "block";
+        lgPhone.style.display = "none"
+
+        Phone.value = "";
+        toggleBtn.innerText = "Login with phone instead";
+    }
+
+}
+
+function loginValidation() {
+
+    const password = Password.value.trim()
+    if (password === "") {
+        showErr(Password, "This field is required");
+        return false;
+    } else {
+        clearErr(Password);
+        return true
+    }
+
+    let data = { password }
+    if (mode === "email") {
+        const email = Email.value.trim()
+        if (email === "") {
+            showErr(Email, "This field is required");
+            return false;
+        }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            showErr(Email, "Invalid email.Please enter a valid email address");
+            return false;
+        }
+        else {
+            clearErr(Email);
+
+        }
+
+        data.email = email;
+    } else {
+        const flagImg = document.getElementById("countryFlag");
+        console.log(flagImg);
+        if (!flagImg.dataset.iso) {
+            showErr(userCountry, "This field is required");
+            return false;
+        }
+        else {
+            clearErr(userCountry);
+
+        }
+        const phone = Phone.value.trim()
+        if (phone === "") {
+            showErr(Phone, "This field is required");
+            return false;
+        }
+        if (Phone.value.length < 6) {
+            showErr(Phone, "Phone Number must be 7 digits long");
+            return false;
+        }
+        else {
+            clearErr(Phone);
+
+        }
+        data.phone = phone
+    }
+    return data
+    return true
+}
 
 async function loginApi() {
-    let loginForm = document.getElementById("login");
+    // let loginForm = document.getElementById("login");
     if (loginForm) {
         loginForm.addEventListener("submit", async (e) => {
             e.preventDefault();
+            if (!loginValidation()) {
+                return
+            }
             console.log(loginForm);
             const formdata = {
                 email: loginForm.lgEmail.value,
@@ -383,12 +474,12 @@ async function loginApi() {
                 const res = await fetch("/login",
                     {
                         method: "POST",
-                        headers: { "Content-Type" : "application/json"},
+                        headers: { "Content-Type": "application/json" },
                         body: JSON.stringify(formdata)
                     })
-                    const data = await res.json();
-                    console.log(data)
-                    
+                const data = await res.json();
+                console.log(data)
+
 
             } catch (error) {
 
