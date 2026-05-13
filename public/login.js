@@ -1,5 +1,8 @@
 const loginForm = document.getElementById("login");
-
+const countryList = document.getElementById("countries");
+const userCountry = document.getElementById("userCountry");
+const userFlag = document.getElementById("countryFlag")
+const Phone = document.getElementById("phone")
 const lgEmail = loginForm.querySelector("#lgemailSec");
 const emailInput = lgEmail.querySelector("#email")
 const lgPhone = loginForm.querySelector("#lgnumberSec")
@@ -78,9 +81,15 @@ function lgphoneVal(phone, img) {
     }
     else {
         clearErr(phoneInput);
-
+        return true
     }
 }
+
+
+const requiredFields = [emailInput,phoneInput,passInput];
+const validationArr = [lgemailVal,lgphoneVal,lgPasswordVal];
+
+inputClear(requiredFields);
 
 function loginValidation() {
     const password = passInput.value.trim()
@@ -90,9 +99,9 @@ function loginValidation() {
     let data = { password }
     if (mode === "email") {
         const email = emailInput.value.trim()
-       if(!lgemailVal(email)) {
-        return false
-       }
+        if (!lgemailVal(email)) {
+            return false
+        }
         data.email = email;
     } else {
         const flagImg = document.getElementById("countryFlag");
@@ -111,15 +120,15 @@ async function loginApi() {
     if (loginForm) {
         loginForm.addEventListener("submit", async (e) => {
             e.preventDefault();
-            const formdata = loginValidation();
-            if (!formdata) {
-                return
-            }
-            console.log(formdata);
-            // const formdata = {
-            //     email: loginForm.lgEmail.value,
-            //     password: loginForm.lgPassword.value
+            // const formdata = loginValidation();
+            // if (!formdata) {
+            //     return
             // }
+            // console.log(formdata);
+            const formdata = {
+                email: emailInput.value,
+                password: passInput.value
+            }
             // console.log(formdata)
             try {
                 const res = await fetch("/login",
@@ -129,7 +138,7 @@ async function loginApi() {
                         body: JSON.stringify(formdata)
                     })
                 const data = await res.json();
-                console.log(data)
+                console.log(data.success)
 
 
             } catch (error) {

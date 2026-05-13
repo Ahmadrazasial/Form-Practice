@@ -1,16 +1,30 @@
 import { body, validationResult } from "express-validator";
 
+
 export const loginValidator = [
     //email
-    body("email").trim()
+
+    body("email").optional().trim()
     .notEmpty().withMessage("Email is required")
     .isEmail()
     .withMessage("invalid email"),
 
+    body("phone").optional().
+    trim().
+    notEmpty().withMessage("Phone number is required").
+    isLength(6).withMessage("Phone number must be 7 digits long"),
+   
     body("password").
     trim()
     .notEmpty()
     .withMessage("Password is requied"),
+
+    body().custom((value)=>{
+        if(!value.email && !value.phone){
+            throw new Error("Either email or phone is required")
+        }
+        return true
+    }),
 
 (req , res , next)=>{
     const result = validationResult(req);

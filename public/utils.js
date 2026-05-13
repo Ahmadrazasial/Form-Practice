@@ -11,8 +11,8 @@ function clearErr(input) {
     if (!error) return;
     error.textContent = "";
 }
-
-requiredFields.filter(Boolean).forEach((field, index) => {
+function inputClear(fields,validationArr){
+    fields.filter(Boolean).forEach((field, index) => {
     if (!field) return;
     field.addEventListener("input", () => {
         clearErr(field);
@@ -22,6 +22,9 @@ requiredFields.filter(Boolean).forEach((field, index) => {
         validationArr[index]();
     })
 })
+}
+
+
 
 const phoneDiv = document.getElementById("fullNumber");
 

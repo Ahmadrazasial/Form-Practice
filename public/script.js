@@ -156,7 +156,7 @@ function Validate() {
     return validationArr.map(field => field()).every(Boolean);
 }
 
-
+inputClear(requiredFields,validationArr);
 
 
 async function signupApi() {
@@ -164,9 +164,9 @@ async function signupApi() {
     if (signupform) {
         signupform.addEventListener("submit", async (e) => {
             e.preventDefault();
-            if (!Validate()) {
-                return
-            }
+            // if (!Validate()) {
+            //     return
+            // }
             const formdata = {
                 firstname: signupform.first.value,
                 lastname: signupform.last.value,
@@ -184,7 +184,7 @@ async function signupApi() {
                 )
                 const data = await res.json();
                 console.log(data)
-
+                if(Object.keys(data.fields).length > 2) return
 
 
                 if (data.success === false) {
