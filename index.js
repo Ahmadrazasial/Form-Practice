@@ -9,9 +9,10 @@ import { signupValidate } from "./validators/signupValidator.js";
 import ratelimit from "express-rate-limit";
 import cors from "cors";
 import logger from "./logger.js";
+import bcrypt from "bcrypt"
 
 const app = express();
-const port = process.env.HOST_PORT ;
+const port = process.env.HOST_PORT;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,28 +21,28 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(cors(
     {
-        origin:`http://localhost:${port}/`,
-        credentials:true
+        origin: `http://localhost:${port}/`,
+        credentials: true
     }
 ))
 app.use((req, res, next) => {
-  logger.info(`Incoming request: ${req.method} ${req.url}`);
-  next();
+    logger.info(`Incoming request: ${req.method} ${req.url}`);
+    next();
 });
 const connect = await mongoose.connect(process.env.DB_URL);
 
 
 
 const signupLimiter = ratelimit({
-    windowMs:15 * 60 * 1000,
-    max:30,
-    message:{
-        success :false,
-        meassage : "Too many attemps.Please try agin later"
+    windowMs: 15 * 60 * 1000,
+    max: 30,
+    message: {
+        success: false,
+        meassage: "Too many attemps.Please try agin later"
     }
 })
 
-app.post("/signup", signupValidate, signupLimiter,async (req, res) => {
+app.post("/signup", signupValidate, signupLimiter, async (req, res) => {
     try {
         const fields = {}
 
@@ -52,16 +53,16 @@ app.post("/signup", signupValidate, signupLimiter,async (req, res) => {
         logger.info(`Signup attempt for email: ${email}`);
 
         const phoneUser = await User.findOne({ phoneNumber: number }).select("phoneNumber");
-        const emailUser = await User.findOne({ email: email.toLowerCase().trim()}).select("email");
+        const emailUser = await User.findOne({ email: email.toLowerCase().trim() }).select("email");
         // console.log(eUser)    
         if (phoneUser) fields.phoneNumber = "Phone number already exists";
         if (emailUser) fields.email = "Email already exists"
 
         if (Object.keys(fields).length > 0) {
-            return res.status(400).json({ 
-                success:false,
+            return res.status(400).json({
+                success: false,
                 fields
-             });
+            });
         }
 
         await User.create({
@@ -71,10 +72,10 @@ app.post("/signup", signupValidate, signupLimiter,async (req, res) => {
             email: email.toLowerCase().trim(),
             password: password
         })
-         logger.info(`User created successfully: ${email}`);
+        logger.info(`User created successfully: ${email}`);
         return res.status(201).json({
             success: true,
-            message:"Congratulations ! You have Successfully Signed Up"
+            message: "Congratulations ! You have Successfully Signed Up"
         })
     } catch (error) {
         console.error(error)
@@ -86,7 +87,7 @@ app.post("/signup", signupValidate, signupLimiter,async (req, res) => {
                 errors[input] = error.errors[input].message;
             })
             return res.status(400).json({
-                success:false,
+                success: false,
                 errors
             }
             )
@@ -96,7 +97,7 @@ app.post("/signup", signupValidate, signupLimiter,async (req, res) => {
             const errors = {}
             errors[field] = `${field} already exists`
             return res.status(400).json({
-                success:false,
+                success: false,
                 errors
             }
 
@@ -104,26 +105,74 @@ app.post("/signup", signupValidate, signupLimiter,async (req, res) => {
 
         }
 
-            logger.error(`Signup failed for ${req.body.email}: ${error.message}`)
-        return res.status(500).json({ 
-            success:false,
-            error })
+        logger.error(`Signup failed for ${req.body.email}: ${error.message}`)
+        return res.status(500).json({
+            success: false,
+            error
+        })
     }
 })
 
-import {loginValidator} from "./validators/loginvalidator.js";
+import { loginValidator } from "./validators/loginvalidator.js";
 
 
 
-app.post("/login",loginValidator ,async(req,res)=>{
+app.post("/login", loginValidator, async (req, res) => {
     try {
-        const { email ,phone, password } = req.body;
 
-        const useEmail = await User.find({})
+        const errFields = {}
+        const { email, phone, password } = req.body;
 
-        
+
+       async function loginAuthen(user, name,pass) {
+            if (!user) {
+                errFields.credients = `invalid ${name} / password`;
+                return res.status(400).json({
+                    success: false,
+                    errFields
+                })
+            }
+            else {
+                console.log("exist", user)
+                const userPass = user.password
+                const comparison = await bcrypt.compare(pass, userPass)
+                if (!comparison) {
+                    errFields.credients = `invalid ${name} / password`;
+                    console.log(errFields)
+                    return res.status(400).json({
+                        success: false,
+                        errFields
+                    })
+                }
+                else {
+                    console.log("matched")
+                    return res.status(201).json({
+                        success: true,
+                        message: "You have successfully loged in"
+
+                    })
+                }
+
+            }
+        }
+
+        if (email) {
+            console.log(email)
+            const userEmail = await User.findOne({ email: email.toLowerCase().trim() }).select()
+            loginAuthen(userEmail, "email",password)
+
+
+
+        } else {
+            console.log(phone)
+            const userPhone = await User.findOne({ phoneNumber: phone.trim() }).select()
+            loginAuthen(userPhone,"phone",password)
+           
+        }
+
+
     } catch (error) {
-        
+
     }
 })
 

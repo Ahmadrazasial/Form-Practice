@@ -164,9 +164,9 @@ async function signupApi() {
     if (signupform) {
         signupform.addEventListener("submit", async (e) => {
             e.preventDefault();
-            // if (!Validate()) {
-            //     return
-            // }
+            if (!Validate()) {
+                return
+            }
             const formdata = {
                 firstname: signupform.first.value,
                 lastname: signupform.last.value,
@@ -184,10 +184,10 @@ async function signupApi() {
                 )
                 const data = await res.json();
                 console.log(data)
-                if(Object.keys(data.fields).length > 2) return
+                if(!data.success) {return}
 
 
-                if (data.success === false) {
+                 if (data.success === false) {
                     const obj = data.fields;
                     Object.assign(serverErrors, obj);
 
@@ -206,11 +206,13 @@ async function signupApi() {
                         }
                     }
                     return;
-                }
-                const message = data.message;
+                }else{
+                    const message = data.message;
                 console.log(message);
                 spformsSec.style.display = "none";
                 spformsSec.parentElement.append(successMs(message))
+                }
+                
             } catch (error) {
                 console.error("Error", error)
             }

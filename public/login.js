@@ -36,9 +36,9 @@ function toggleMode() {
 
 }
 
-function lgPasswordVal(password) {
+function lgPasswordVal(pass) {
 
-    if (password === "") {
+    if (pass === "") {
         showErr(passInput, "This field is required");
         return false;
     } else {
@@ -62,21 +62,24 @@ function lgemailVal(email) {
         return true
     }
 }
-function lgphoneVal(phone, img) {
+function lgcodeVal(img) {
     if (!img.dataset.iso) {
         showErr(userCountry, "This field is required");
         return false;
     }
     else {
         clearErr(userCountry);
-
+        return true
     }
+}
+function lgphoneVal(phone) {
+    
     if (phone === "") {
         showErr(phoneInput, "This field is required");
         return false;
     }
-    if (phone.length < 6) {
-        showErr(phoneInput, "Phone Number must be 7 digits long");
+    if (phone.length < 11) {
+        showErr(phoneInput, "Phone Number must be 11 digits long");
         return false;
     }
     else {
@@ -86,10 +89,10 @@ function lgphoneVal(phone, img) {
 }
 
 
-const requiredFields = [emailInput,phoneInput,passInput];
-const validationArr = [lgemailVal,lgphoneVal,lgPasswordVal];
+const requiredFields = [emailInput, phoneInput,userCountry, passInput];
+const validationArr = [lgemailVal,lgcodeVal ,lgphoneVal, lgPasswordVal];
 
-inputClear(requiredFields);
+inputClear(requiredFields, validationArr);
 
 function loginValidation() {
     const password = passInput.value.trim()
@@ -108,7 +111,8 @@ function loginValidation() {
         console.log(flagImg);
 
         const phone = phoneInput.value.trim()
-        lgphoneVal(phone, flagImg)
+        lgcodeVal(flagImg)
+        lgphoneVal(phone)
         data.phone = phone
     }
     return data
@@ -120,15 +124,15 @@ async function loginApi() {
     if (loginForm) {
         loginForm.addEventListener("submit", async (e) => {
             e.preventDefault();
-            // const formdata = loginValidation();
-            // if (!formdata) {
-            //     return
-            // }
-            // console.log(formdata);
-            const formdata = {
-                email: emailInput.value,
-                password: passInput.value
+            const formdata = loginValidation();
+            if (!formdata.password || (!formdata.email && !formdata.phone)) {
+                return
             }
+            // console.log(formdata);
+            // const formdata = {
+            //     email: emailInput.value,
+            //     password: passInput.value
+            // }
             // console.log(formdata)
             try {
                 const res = await fetch("/login",
@@ -137,8 +141,8 @@ async function loginApi() {
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify(formdata)
                     })
-                const data = await res.json();
-                console.log(data.success)
+                const dataRet = await res.json();
+                console.log(dataRet)
 
 
             } catch (error) {
