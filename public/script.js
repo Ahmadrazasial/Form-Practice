@@ -8,6 +8,7 @@ const Email = document.getElementById("email")
 const Password = document.getElementById("password")
 const Confirm = document.getElementById("confirm")
 const spformsSec = document.getElementById("spformSec");
+const spForm = document.getElementById("signup");
 const errSpans = document.querySelectorAll(".errSpan");
 const countryList = document.getElementById("countries");
 const userFlag = document.getElementById("countryFlag")
@@ -60,8 +61,8 @@ function validateNumber() {
         showErr(Phone, "This field is required");
         return false;
     }
-    if (Phone.value.length < 6) {
-        showErr(Phone, "Phone Number must be 7 digits long");
+    if (Phone.value.trim().length < 11) {
+        showErr(Phone, "Phone Number must be 11 digits long");
         return false;
     }
     else {
@@ -125,29 +126,7 @@ function validateConfirm() {
 }
 
 
-function successMs(msg) {
-    const successSec = document.createElement("div")
-    successSec.className = "successful";
-    const greet = document.createElement("img")
-    greet.className = "greet";
-    greet.src = "images/success.svg";
-    const text = document.createElement("h3")
-    text.className = "text";
-    text.textContent = msg || "Success";
-    const link = document.createElement("a")
-    link.className = "redirect";
-    link.textContent = "Continue"
 
-    link.addEventListener("click", (e) => {
-        e.preventDefault();
-
-        successSec.remove();
-
-        formsSec.style.display = "flex";
-    })
-    successSec.append(greet, text, link);
-    return successSec;
-}
 
 const serverErrors = {};
 
@@ -156,7 +135,7 @@ function Validate() {
     return validationArr.map(field => field()).every(Boolean);
 }
 
-inputClear(requiredFields,validationArr);
+inputClear(requiredFields, validationArr);
 
 
 async function signupApi() {
@@ -184,12 +163,12 @@ async function signupApi() {
                 )
                 const data = await res.json();
                 console.log(data)
-                if(!data.success) {return}
+                // if (!data.success) { return }
 
 
-                 if (data.success === false) {
+                if (data.success === false){
                     const obj = data.fields;
-                    Object.assign(serverErrors, obj);
+                    // Object.assign(serverErrors, obj);
 
                     for (const key in obj) {
                         const element = obj[key];
@@ -206,13 +185,20 @@ async function signupApi() {
                         }
                     }
                     return;
-                }else{
-                    const message = data.message;
-                console.log(message);
-                spformsSec.style.display = "none";
-                spformsSec.parentElement.append(successMs(message))
                 }
-                
+                if(data.success === true){
+                    // requiredFields.forEach(field=>{
+                    //     field.value = ""
+                    // })
+                    spForm.reset()
+                    userFlag.src = ""
+                    userFlag.dataset.iso = ""
+                    const message = data.message;
+                    console.log(message);
+                    spformsSec.style.display = "none";
+                    spformsSec.parentElement.append(successMs(message,spformsSec))
+                }
+
             } catch (error) {
                 console.error("Error", error)
             }

@@ -16,6 +16,7 @@ function inputClear(fields,validationArr){
     if (!field) return;
     field.addEventListener("input", () => {
         clearErr(field);
+        clearAuthErr(authSpan)
         // if (serverErrors && serverErrors[field.name]) {
         //     delete serverErrors[field.name];
         // };
@@ -38,4 +39,28 @@ if (phoneDiv) {
     phoneDiv.addEventListener("focusout", () => {
         if (phoneDiv) phoneDiv.classList.remove("outline");
     })
+}
+
+function successMs(msg,formsSec) {
+    const successSec = document.createElement("div")
+    successSec.className = "successful";
+    const greet = document.createElement("img")
+    greet.className = "greet";
+    greet.src = "images/success.svg";
+    const text = document.createElement("h3")
+    text.className = "text";
+    text.textContent = msg || "Success";
+    const link = document.createElement("a")
+    link.className = "redirect";
+    link.textContent = "Continue"
+
+    link.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        successSec.remove();
+
+        formsSec.style.display = "flex";
+    })
+    successSec.append(greet, text, link);
+    return successSec;
 }

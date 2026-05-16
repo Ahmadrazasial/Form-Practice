@@ -1,3 +1,5 @@
+
+const lgFormSec = document.getElementById("lgformSec")
 const loginForm = document.getElementById("login");
 const countryList = document.getElementById("countries");
 const userCountry = document.getElementById("userCountry");
@@ -10,35 +12,45 @@ const phoneInput = lgPhone.querySelector("#phone")
 const lgPassword = loginForm.querySelector("#lgpasswordSec")
 const passInput = lgPassword.querySelector("#password")
 const toggleBtn = loginForm.querySelector("#toggleBtn")
-console.log(loginForm)
+const authSpan = loginForm.querySelector("#authError")
+// console.log(loginForm)
 
 let mode = "email"
 function toggleMode() {
-
+clearAuthErr(authSpan)
 
     if (mode === "email") {
-        // clearErr(Phone)
+        clearErr(emailInput)
+        clearErr(passInput)
         mode = "phone";
+
+        emailInput.value = "";
+        passInput.value = "";
         lgEmail.style.display = "none";
         lgPhone.style.display = "block"
 
-        emailInput.value = "";
+
         toggleBtn.innerText = "Login with email instead";
     }
     else {
+        clearErr(phoneInput)
+        clearErr(userCountry)
+        clearErr(passInput)
         mode = "email";
+        phoneInput.value = "";
+        passInput.value = "";
         lgEmail.style.display = "block";
         lgPhone.style.display = "none"
         // clearErr(Phone)
-        phoneInput.value = "";
+
         toggleBtn.innerText = "Login with phone instead";
     }
 
 }
 
-function lgPasswordVal(pass) {
-
-    if (pass === "") {
+function lgPasswordVal() {
+    const password = passInput.value.trim()
+    if (password === "") {
         showErr(passInput, "This field is required");
         return false;
     } else {
@@ -47,7 +59,8 @@ function lgPasswordVal(pass) {
     }
 }
 
-function lgemailVal(email) {
+function lgemailVal() {
+    const email = emailInput.value.trim()
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (email === "") {
         showErr(emailInput, "This field is required");
@@ -62,8 +75,9 @@ function lgemailVal(email) {
         return true
     }
 }
-function lgcodeVal(img) {
-    if (!img.dataset.iso) {
+function lgcodeVal() {
+
+    if (!userFlag.dataset.iso) {
         showErr(userCountry, "This field is required");
         return false;
     }
@@ -72,8 +86,8 @@ function lgcodeVal(img) {
         return true
     }
 }
-function lgphoneVal(phone) {
-    
+function lgphoneVal() {
+    const phone = phoneInput.value.trim()
     if (phone === "") {
         showErr(phoneInput, "This field is required");
         return false;
@@ -89,51 +103,57 @@ function lgphoneVal(phone) {
 }
 
 
-const requiredFields = [emailInput, phoneInput,userCountry, passInput];
-const validationArr = [lgemailVal,lgcodeVal ,lgphoneVal, lgPasswordVal];
+const requiredFields = [emailInput, userCountry, phoneInput, passInput];
+const validationArr = [lgemailVal, lgcodeVal, lgphoneVal, lgPasswordVal];
 
 inputClear(requiredFields, validationArr);
 
 function loginValidation() {
-    const password = passInput.value.trim()
 
-    lgPasswordVal(password)
 
+    lgPasswordVal()
+    const password = passInput.value.trim();
     let data = { password }
     if (mode === "email") {
-        const email = emailInput.value.trim()
-        if (!lgemailVal(email)) {
+
+        if (!lgemailVal()) {
             return false
         }
-        data.email = email;
+        data.email = emailInput.value.trim();
     } else {
-        const flagImg = document.getElementById("countryFlag");
-        console.log(flagImg);
 
-        const phone = phoneInput.value.trim()
-        lgcodeVal(flagImg)
-        lgphoneVal(phone)
-        data.phone = phone
+
+
+        lgcodeVal()
+        lgphoneVal()
+        data.phone = phoneInput.value
     }
     return data
 
 }
 
+function showAuthErr(span,message) {
+    span.style.display = "block";
+    span.textContent = message;
+}
+function clearAuthErr(span) {
+    span.style.display = "none";
+    span.textContent = "";
+}
 async function loginApi() {
     // let loginForm = document.getElementById("login");
     if (loginForm) {
         loginForm.addEventListener("submit", async (e) => {
             e.preventDefault();
+            clearAuthErr(authSpan)
             const formdata = loginValidation();
-            if (!formdata.password || (!formdata.email && !formdata.phone)) {
-                return
-            }
+            if (!formdata.password || (!formdata.email && !formdata.phone)) return
             // console.log(formdata);
             // const formdata = {
-            //     email: emailInput.value,
-            //     password: passInput.value
+            //     email: emailInput.value.trim(),
+            //     password: passInput.value.trim()
             // }
-            // console.log(formdata)
+            console.log(formdata)
             try {
                 const res = await fetch("/login",
                     {
@@ -142,11 +162,30 @@ async function loginApi() {
                         body: JSON.stringify(formdata)
                     })
                 const dataRet = await res.json();
-                console.log(dataRet)
+                // console.log(dataRet)
 
+                if (dataRet.success === false) {
+                    const obj = dataRet.errFields
+
+                    for (const key in obj) {
+
+                        const element = obj[key];
+
+                        // console.log(element)
+
+                       showAuthErr(authSpan,element)
+                    }
+                }else{
+                    loginForm.reset()
+                    userFlag.src = ""
+                    userFlag.dataset.iso = ""
+                    const msg = dataRet.message;
+                    lgFormSec.style.display = "none";
+                    lgFormSec.parentElement.append(successMs(msg,lgFormSec))
+                }
 
             } catch (error) {
-
+                console.log("Error", error)
             }
         })
 

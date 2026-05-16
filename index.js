@@ -124,55 +124,58 @@ app.post("/login", loginValidator, async (req, res) => {
         const { email, phone, password } = req.body;
 
 
-       async function loginAuthen(user, name,pass) {
-            if (!user) {
-                errFields.credients = `invalid ${name} / password`;
-                return res.status(400).json({
-                    success: false,
-                    errFields
-                })
-            }
-            else {
-                console.log("exist", user)
-                const userPass = user.password
-                const comparison = await bcrypt.compare(pass, userPass)
-                if (!comparison) {
+           async function loginAuthen(user, name,pass) {
+                if (!user) {
                     errFields.credients = `invalid ${name} / password`;
-                    console.log(errFields)
                     return res.status(400).json({
                         success: false,
                         errFields
                     })
                 }
                 else {
-                    console.log("matched")
-                    return res.status(201).json({
-                        success: true,
-                        message: "You have successfully loged in"
+                    console.log("exist", user)
+                    const userPass = user.password
+                    const comparison = await bcrypt.compare(pass, userPass)
+                    if (!comparison) {
+                        errFields.credients = `invalid ${name} / password`;
+                        console.log(errFields)
+                        return res.status(400).json({
+                            success: false,
+                            errFields
+                        })
+                    }
+                    else {
+                        console.log("matched")
+                        return res.status(201).json({
+                            success: true,
+                            message: "You have successfully loged in"
 
-                    })
+                        })
+                    }
+
                 }
+            }
+
+            if (email) {
+                console.log(email)
+                const userEmail = await User.findOne({ email: email.toLowerCase().trim() }).select()
+                loginAuthen(userEmail, "email",password)
+
+
+
+            } else {
+                console.log(phone)
+                const userPhone = await User.findOne({ phoneNumber: phone.trim() }).select()
+                loginAuthen(userPhone,"phone",password)
 
             }
-        }
-
-        if (email) {
-            console.log(email)
-            const userEmail = await User.findOne({ email: email.toLowerCase().trim() }).select()
-            loginAuthen(userEmail, "email",password)
-
-
-
-        } else {
-            console.log(phone)
-            const userPhone = await User.findOne({ phoneNumber: phone.trim() }).select()
-            loginAuthen(userPhone,"phone",password)
-           
-        }
 
 
     } catch (error) {
-
+        return res.status(500).json({
+            success: false,
+            error
+        })
     }
 })
 
