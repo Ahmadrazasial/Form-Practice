@@ -166,7 +166,7 @@ async function loginApi() {
 
                 if (dataRet.success === false) {
                     const obj = dataRet.errFields
-
+                    
                     for (const key in obj) {
 
                         const element = obj[key];
@@ -176,12 +176,17 @@ async function loginApi() {
                        showAuthErr(authSpan,element)
                     }
                 }else{
+
+                    const jwtToken = dataRet.token
+                    localStorage.setItem("token",jwtToken)
                     loginForm.reset()
                     userFlag.src = ""
                     userFlag.dataset.iso = ""
                     const msg = dataRet.message;
-                    lgFormSec.style.display = "none";
-                    lgFormSec.parentElement.append(successMs(msg,lgFormSec))
+                    window.location.href = "/profile.html"
+
+                    // document.getElementById("#container").append(successMs(msg))
+                    
                 }
 
             } catch (error) {
@@ -194,3 +199,4 @@ async function loginApi() {
 
 loginApi()
 console.log("connected")
+

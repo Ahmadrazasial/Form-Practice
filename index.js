@@ -114,6 +114,8 @@ app.post("/signup", signupValidate, signupLimiter, async (req, res) => {
 })
 
 import { loginValidator } from "./validators/loginvalidator.js";
+import jwt from "jsonwebtoken";
+import { verifyToken } from "./middlewares/auth.js";
 
 
 
@@ -123,7 +125,7 @@ app.post("/login", loginValidator, async (req, res) => {
         const errFields = {}
         const { email, phone, password } = req.body;
 
-
+        logger.info(`Login attempt for email: ${email}`);
            async function loginAuthen(user, name,pass) {
                 if (!user) {
                     errFields.credients = `invalid ${name} / password`;
@@ -146,8 +148,23 @@ app.post("/login", loginValidator, async (req, res) => {
                     }
                     else {
                         console.log("matched")
+                        logger.info(`User created successfully: ${user}`);
+
+                        const userInfo = {
+                            id:user.id,
+                            role:"user"
+                            
+                        }
+                        if(name === "email"){
+                            userInfo.user = user.email
+                        }else{
+                            userInfo.user = user.phoneNumber
+                        }
+                        const secret = process.env.JWT_SECRET
+                        const token = jwt.sign(userInfo,secret,{expiresIn:'15m'})
                         return res.status(201).json({
                             success: true,
+                            token,
                             message: "You have successfully loged in"
 
                         })
@@ -162,7 +179,6 @@ app.post("/login", loginValidator, async (req, res) => {
                 loginAuthen(userEmail, "email",password)
 
 
-
             } else {
                 console.log(phone)
                 const userPhone = await User.findOne({ phoneNumber: phone.trim() }).select()
@@ -172,6 +188,7 @@ app.post("/login", loginValidator, async (req, res) => {
 
 
     } catch (error) {
+        logger.error(`Login failed for ${req.body.email || req.body.phone}: ${error.message}`)
         return res.status(500).json({
             success: false,
             error
@@ -181,4 +198,20 @@ app.post("/login", loginValidator, async (req, res) => {
 
 app.listen(port, () => {
     console.log(`Server running on ${port}`);
+})
+
+app.get("/profile",verifyToken, async(req,res)=>{
+    try {
+        const user = await User.findById(req.user.id).select("-password");
+        return res.status(200).json({
+            success:true,
+            user
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            success:false,
+            message:"sercer error"
+        })
+    }
 })

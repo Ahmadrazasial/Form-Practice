@@ -1969,3 +1969,243 @@
 [2026-05-16 18:05:87] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
 [2026-05-16 18:05:89] INFO : Incoming request: POST /login
 [2026-05-16 18:05:63] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 15:05:91] INFO : Incoming request: GET /favicon.ico
+[2026-05-18 15:05:48] INFO : Incoming request: POST /login
+[2026-05-18 15:05:50] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-18 15:05:24] INFO : Incoming request: POST /login
+[2026-05-18 15:05:24] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-18 15:05:66] INFO : Incoming request: POST /login
+[2026-05-18 15:05:66] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-18 15:05:84] INFO : User created successfully: {
+  _id: new ObjectId('6a071ccf253f572a8ec14e81'),
+  firstname: 'a',
+  lastname: 'r',
+  phoneNumber: '+92 2309999',
+  email: 'ahmadrazauch15@gmail.com',
+  password: '$2b$10$Dxdnljj4zeYNXFEsIO.JfOmQUqbzdEpgGccdEHrT5cQwaXwmr6HPe',
+  createdAt: 2026-05-15T13:17:03.274Z,
+  updatedAt: 2026-05-15T13:17:03.274Z,
+  __v: 0,
+  fullname: 'a r',
+  id: '6a071ccf253f572a8ec14e81'
+}
+[2026-05-18 15:05:56] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 15:05:32] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 15:05:76] INFO : Incoming request: POST /login
+[2026-05-18 15:05:78] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-18 15:05:00] INFO : User created successfully: {
+  _id: new ObjectId('6a071ccf253f572a8ec14e81'),
+  firstname: 'a',
+  lastname: 'r',
+  phoneNumber: '+92 2309999',
+  email: 'ahmadrazauch15@gmail.com',
+  password: '$2b$10$Dxdnljj4zeYNXFEsIO.JfOmQUqbzdEpgGccdEHrT5cQwaXwmr6HPe',
+  createdAt: 2026-05-15T13:17:03.274Z,
+  updatedAt: 2026-05-15T13:17:03.274Z,
+  __v: 0,
+  fullname: 'a r',
+  id: '6a071ccf253f572a8ec14e81'
+}
+[2026-05-18 16:05:01] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 16:05:91] INFO : Incoming request: POST /login
+[2026-05-18 16:05:93] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-18 16:05:43] INFO : Incoming request: POST /login
+[2026-05-18 16:05:44] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-18 16:05:60] INFO : User created successfully: {
+  _id: new ObjectId('6a071ccf253f572a8ec14e81'),
+  firstname: 'a',
+  lastname: 'r',
+  phoneNumber: '+92 2309999',
+  email: 'ahmadrazauch15@gmail.com',
+  password: '$2b$10$Dxdnljj4zeYNXFEsIO.JfOmQUqbzdEpgGccdEHrT5cQwaXwmr6HPe',
+  createdAt: 2026-05-15T13:17:03.274Z,
+  updatedAt: 2026-05-15T13:17:03.274Z,
+  __v: 0,
+  fullname: 'a r',
+  id: '6a071ccf253f572a8ec14e81'
+}
+[2026-05-18 16:05:23] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 16:05:19] INFO : Incoming request: POST /login
+[2026-05-18 16:05:20] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-18 16:05:42] INFO : User created successfully: {
+  _id: new ObjectId('6a071ccf253f572a8ec14e81'),
+  firstname: 'a',
+  lastname: 'r',
+  phoneNumber: '+92 2309999',
+  email: 'ahmadrazauch15@gmail.com',
+  password: '$2b$10$Dxdnljj4zeYNXFEsIO.JfOmQUqbzdEpgGccdEHrT5cQwaXwmr6HPe',
+  createdAt: 2026-05-15T13:17:03.274Z,
+  updatedAt: 2026-05-15T13:17:03.274Z,
+  __v: 0,
+  fullname: 'a r',
+  id: '6a071ccf253f572a8ec14e81'
+}
+[2026-05-18 16:05:60] INFO : Incoming request: POST /login
+[2026-05-18 16:05:62] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-18 16:05:86] INFO : User created successfully: {
+  _id: new ObjectId('6a071ccf253f572a8ec14e81'),
+  firstname: 'a',
+  lastname: 'r',
+  phoneNumber: '+92 2309999',
+  email: 'ahmadrazauch15@gmail.com',
+  password: '$2b$10$Dxdnljj4zeYNXFEsIO.JfOmQUqbzdEpgGccdEHrT5cQwaXwmr6HPe',
+  createdAt: 2026-05-15T13:17:03.274Z,
+  updatedAt: 2026-05-15T13:17:03.274Z,
+  __v: 0,
+  fullname: 'a r',
+  id: '6a071ccf253f572a8ec14e81'
+}
+[2026-05-18 16:05:60] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 16:05:68] INFO : Incoming request: POST /login
+[2026-05-18 16:05:69] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-18 16:05:85] INFO : User created successfully: {
+  _id: new ObjectId('6a071ccf253f572a8ec14e81'),
+  firstname: 'a',
+  lastname: 'r',
+  phoneNumber: '+92 2309999',
+  email: 'ahmadrazauch15@gmail.com',
+  password: '$2b$10$Dxdnljj4zeYNXFEsIO.JfOmQUqbzdEpgGccdEHrT5cQwaXwmr6HPe',
+  createdAt: 2026-05-15T13:17:03.274Z,
+  updatedAt: 2026-05-15T13:17:03.274Z,
+  __v: 0,
+  fullname: 'a r',
+  id: '6a071ccf253f572a8ec14e81'
+}
+[2026-05-18 16:05:88] INFO : Incoming request: GET /profile
+[2026-05-18 16:05:41] INFO : Incoming request: GET /profile
+[2026-05-18 16:05:08] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 16:05:12] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 16:05:60] INFO : Incoming request: POST /login
+[2026-05-18 16:05:61] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-18 16:05:79] INFO : User created successfully: {
+  _id: new ObjectId('6a071ccf253f572a8ec14e81'),
+  firstname: 'a',
+  lastname: 'r',
+  phoneNumber: '+92 2309999',
+  email: 'ahmadrazauch15@gmail.com',
+  password: '$2b$10$Dxdnljj4zeYNXFEsIO.JfOmQUqbzdEpgGccdEHrT5cQwaXwmr6HPe',
+  createdAt: 2026-05-15T13:17:03.274Z,
+  updatedAt: 2026-05-15T13:17:03.274Z,
+  __v: 0,
+  fullname: 'a r',
+  id: '6a071ccf253f572a8ec14e81'
+}
+[2026-05-18 16:05:83] INFO : Incoming request: GET /profile
+[2026-05-18 16:05:06] INFO : Incoming request: GET /profile
+[2026-05-18 16:05:68] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 16:05:85] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 16:05:69] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 16:05:84] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 16:05:09] INFO : Incoming request: POST /login
+[2026-05-18 16:05:11] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-18 16:05:29] INFO : User created successfully: {
+  _id: new ObjectId('6a071ccf253f572a8ec14e81'),
+  firstname: 'a',
+  lastname: 'r',
+  phoneNumber: '+92 2309999',
+  email: 'ahmadrazauch15@gmail.com',
+  password: '$2b$10$Dxdnljj4zeYNXFEsIO.JfOmQUqbzdEpgGccdEHrT5cQwaXwmr6HPe',
+  createdAt: 2026-05-15T13:17:03.274Z,
+  updatedAt: 2026-05-15T13:17:03.274Z,
+  __v: 0,
+  fullname: 'a r',
+  id: '6a071ccf253f572a8ec14e81'
+}
+[2026-05-18 16:05:38] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 16:05:54] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 16:05:62] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 16:05:90] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 16:05:68] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 17:05:08] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 17:05:41] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 17:05:94] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 17:05:30] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 17:05:27] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 17:05:28] INFO : Incoming request: GET /profile
+[2026-05-18 17:05:78] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 17:05:96] INFO : Incoming request: GET /profile
+[2026-05-18 17:05:97] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 17:05:39] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 17:05:66] INFO : Incoming request: GET /profile
+[2026-05-18 17:05:69] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 17:05:11] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 17:05:66] INFO : Incoming request: POST /login
+[2026-05-18 17:05:66] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-18 17:05:77] INFO : User created successfully: {
+  _id: new ObjectId('6a071ccf253f572a8ec14e81'),
+  firstname: 'a',
+  lastname: 'r',
+  phoneNumber: '+92 2309999',
+  email: 'ahmadrazauch15@gmail.com',
+  password: '$2b$10$Dxdnljj4zeYNXFEsIO.JfOmQUqbzdEpgGccdEHrT5cQwaXwmr6HPe',
+  createdAt: 2026-05-15T13:17:03.274Z,
+  updatedAt: 2026-05-15T13:17:03.274Z,
+  __v: 0,
+  fullname: 'a r',
+  id: '6a071ccf253f572a8ec14e81'
+}
+[2026-05-18 17:05:84] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 17:05:85] INFO : Incoming request: GET /profile
+[2026-05-18 17:05:29] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 17:05:95] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 17:05:38] INFO : Incoming request: POST /login
+[2026-05-18 17:05:39] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-18 17:05:49] INFO : User created successfully: {
+  _id: new ObjectId('6a071ccf253f572a8ec14e81'),
+  firstname: 'a',
+  lastname: 'r',
+  phoneNumber: '+92 2309999',
+  email: 'ahmadrazauch15@gmail.com',
+  password: '$2b$10$Dxdnljj4zeYNXFEsIO.JfOmQUqbzdEpgGccdEHrT5cQwaXwmr6HPe',
+  createdAt: 2026-05-15T13:17:03.274Z,
+  updatedAt: 2026-05-15T13:17:03.274Z,
+  __v: 0,
+  fullname: 'a r',
+  id: '6a071ccf253f572a8ec14e81'
+}
+[2026-05-18 17:05:56] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 17:05:57] INFO : Incoming request: GET /profile
+[2026-05-18 17:05:98] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 17:05:60] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 17:05:28] INFO : Incoming request: POST /login
+[2026-05-18 17:05:29] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-18 17:05:38] INFO : Incoming request: POST /login
+[2026-05-18 17:05:38] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-18 17:05:48] INFO : User created successfully: {
+  _id: new ObjectId('6a071ccf253f572a8ec14e81'),
+  firstname: 'a',
+  lastname: 'r',
+  phoneNumber: '+92 2309999',
+  email: 'ahmadrazauch15@gmail.com',
+  password: '$2b$10$Dxdnljj4zeYNXFEsIO.JfOmQUqbzdEpgGccdEHrT5cQwaXwmr6HPe',
+  createdAt: 2026-05-15T13:17:03.274Z,
+  updatedAt: 2026-05-15T13:17:03.274Z,
+  __v: 0,
+  fullname: 'a r',
+  id: '6a071ccf253f572a8ec14e81'
+}
+[2026-05-18 17:05:55] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 17:05:59] INFO : Incoming request: GET /profile
+[2026-05-18 17:05:03] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 17:05:29] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 17:05:38] INFO : Incoming request: POST /login
+[2026-05-18 17:05:39] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-18 17:05:49] INFO : User created successfully: {
+  _id: new ObjectId('6a071ccf253f572a8ec14e81'),
+  firstname: 'a',
+  lastname: 'r',
+  phoneNumber: '+92 2309999',
+  email: 'ahmadrazauch15@gmail.com',
+  password: '$2b$10$Dxdnljj4zeYNXFEsIO.JfOmQUqbzdEpgGccdEHrT5cQwaXwmr6HPe',
+  createdAt: 2026-05-15T13:17:03.274Z,
+  updatedAt: 2026-05-15T13:17:03.274Z,
+  __v: 0,
+  fullname: 'a r',
+  id: '6a071ccf253f572a8ec14e81'
+}
+[2026-05-18 17:05:57] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 17:05:58] INFO : Incoming request: GET /profile
+[2026-05-18 17:05:06] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 17:05:15] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 17:05:91] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-18 17:05:92] INFO : Incoming request: GET /profile
