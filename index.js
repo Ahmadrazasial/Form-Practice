@@ -10,6 +10,9 @@ import ratelimit from "express-rate-limit";
 import cors from "cors";
 import logger from "./logger.js";
 import bcrypt from "bcrypt"
+import cookieParser from "cookie-parser";
+
+
 
 const app = express();
 const port = process.env.HOST_PORT;
@@ -29,6 +32,7 @@ app.use((req, res, next) => {
     logger.info(`Incoming request: ${req.method} ${req.url}`);
     next();
 });
+app.use(cookieParser());
 const connect = await mongoose.connect(process.env.DB_URL);
 
 
@@ -59,7 +63,7 @@ app.post("/signup", signupValidate, signupLimiter, async (req, res) => {
         if (emailUser) fields.email = "Email already exists"
 
         if (Object.keys(fields).length > 0) {
-            return res.status(400).json({
+            return res.status(409).json({
                 success: false,
                 fields
             });
@@ -96,7 +100,7 @@ app.post("/signup", signupValidate, signupLimiter, async (req, res) => {
             const field = Object.keys(error.keyValue)[0];
             const errors = {}
             errors[field] = `${field} already exists`
-            return res.status(400).json({
+            return res.status(409).json({
                 success: false,
                 errors
             }
@@ -126,65 +130,71 @@ app.post("/login", loginValidator, async (req, res) => {
         const { email, phone, password } = req.body;
 
         logger.info(`Login attempt for email: ${email}`);
-           async function loginAuthen(user, name,pass) {
-                if (!user) {
+        async function loginAuthen(user, name, pass) {
+            if (!user) {
+                errFields.credients = `invalid ${name} / password`;
+                return res.status(400).json({
+                    success: false,
+                    errFields
+                })
+            }
+            else {
+                console.log("exist", user)
+                const userPass = user.password
+                const comparison = await bcrypt.compare(pass, userPass)
+                if (!comparison) {
                     errFields.credients = `invalid ${name} / password`;
+                    console.log(errFields)
                     return res.status(400).json({
                         success: false,
                         errFields
                     })
                 }
                 else {
-                    console.log("exist", user)
-                    const userPass = user.password
-                    const comparison = await bcrypt.compare(pass, userPass)
-                    if (!comparison) {
-                        errFields.credients = `invalid ${name} / password`;
-                        console.log(errFields)
-                        return res.status(400).json({
-                            success: false,
-                            errFields
-                        })
+                    console.log("matched")
+                    logger.info(`User logged in successfully: ${user.id}`);
+
+                    const userInfo = {
+                        id: user.id,
+                        role: "user"
+
                     }
-                    else {
-                        console.log("matched")
-                        logger.info(`User created successfully: ${user}`);
-
-                        const userInfo = {
-                            id:user.id,
-                            role:"user"
-                            
-                        }
-                        if(name === "email"){
-                            userInfo.user = user.email
-                        }else{
-                            userInfo.user = user.phoneNumber
-                        }
-                        const secret = process.env.JWT_SECRET
-                        const token = jwt.sign(userInfo,secret,{expiresIn:'15m'})
-                        return res.status(201).json({
-                            success: true,
-                            token,
-                            message: "You have successfully loged in"
-
-                        })
+                    if (name === "email") {
+                        userInfo.user = user.email
+                    } else {
+                        userInfo.user = user.phoneNumber
                     }
+                    const secret = process.env.JWT_SECRET
+                    const token = jwt.sign(userInfo, secret, { expiresIn: '1d' });
+                    res.cookie("token",token,{
+                        httpOnly:true,
+                        secure: false,
+                        sameSite:"lax",
+                        maxAge:24 * 60 * 60 * 1000
+                    })
+                    return res.status(200).json({
+                        success: true,
+                        // token,
+                        message: "You have successfully logged in"
 
+                    })
                 }
-            }
-
-            if (email) {
-                console.log(email)
-                const userEmail = await User.findOne({ email: email.toLowerCase().trim() }).select()
-                loginAuthen(userEmail, "email",password)
-
-
-            } else {
-                console.log(phone)
-                const userPhone = await User.findOne({ phoneNumber: phone.trim() }).select()
-                loginAuthen(userPhone,"phone",password)
 
             }
+        }
+
+        if (email) {
+            console.log(email)
+            const userEmail = await User.findOne({ email: email.toLowerCase().trim() }).select()
+            loginAuthen(userEmail, "email", password)
+
+
+        } else {
+            console.log(phone)
+            const userPhone = await User.findOne({ phoneNumber: phone.trim() }).select()
+            loginAuthen(userPhone, "phone", password)
+
+        }
 
 
     } catch (error) {
@@ -200,18 +210,24 @@ app.listen(port, () => {
     console.log(`Server running on ${port}`);
 })
 
-app.get("/profile",verifyToken, async(req,res)=>{
+app.get("/profile", verifyToken, async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select("-password");
+        if(!user){ 
+            return res.status(404).json({
+                success:false,
+                message: "User not found"
+            })
+        }
         return res.status(200).json({
-            success:true,
+            success: true,
             user
         })
 
     } catch (error) {
         return res.status(500).json({
-            success:false,
-            message:"sercer error"
+            success: false,
+            message: "sercer error"
         })
     }
 })

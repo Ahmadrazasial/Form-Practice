@@ -2209,3 +2209,156 @@
 [2026-05-18 17:05:15] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
 [2026-05-18 17:05:91] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
 [2026-05-18 17:05:92] INFO : Incoming request: GET /profile
+[2026-05-19 17:05:78] INFO : Incoming request: GET /favicon.ico
+[2026-05-19 17:05:51] INFO : Incoming request: POST /login
+[2026-05-19 17:05:52] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-19 17:05:72] INFO : User created successfully: {
+  _id: new ObjectId('6a071ccf253f572a8ec14e81'),
+  firstname: 'a',
+  lastname: 'r',
+  phoneNumber: '+92 2309999',
+  email: 'ahmadrazauch15@gmail.com',
+  password: '$2b$10$Dxdnljj4zeYNXFEsIO.JfOmQUqbzdEpgGccdEHrT5cQwaXwmr6HPe',
+  createdAt: 2026-05-15T13:17:03.274Z,
+  updatedAt: 2026-05-15T13:17:03.274Z,
+  __v: 0,
+  fullname: 'a r',
+  id: '6a071ccf253f572a8ec14e81'
+}
+[2026-05-19 17:05:80] INFO : Incoming request: GET /profile
+[2026-05-19 17:05:10] INFO : Incoming request: GET /profile
+[2026-05-19 17:05:70] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 17:05:37] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 17:05:39] INFO : Incoming request: GET /profile
+[2026-05-19 17:05:04] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 17:05:07] INFO : Incoming request: GET /profile
+[2026-05-19 17:05:87] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 17:05:89] INFO : Incoming request: GET /profile
+[2026-05-19 17:05:37] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 17:05:39] INFO : Incoming request: GET /profile
+[2026-05-19 17:05:61] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 17:05:63] INFO : Incoming request: GET /profile
+[2026-05-19 17:05:80] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 17:05:82] INFO : Incoming request: GET /profile
+[2026-05-19 17:05:84] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 17:05:88] INFO : Incoming request: GET /profile
+[2026-05-19 17:05:65] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 17:05:67] INFO : Incoming request: GET /profile
+[2026-05-19 17:05:93] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 18:05:30] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 18:05:75] INFO : Incoming request: POST /login
+[2026-05-19 18:05:75] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-19 18:05:84] INFO : User logged in successfully: 6a071ccf253f572a8ec14e81
+[2026-05-19 18:05:90] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 18:05:92] INFO : Incoming request: GET /profile
+[2026-05-19 18:05:02] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 18:05:34] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 18:05:65] INFO : Incoming request: POST /login
+[2026-05-19 18:05:65] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-19 18:05:72] INFO : User logged in successfully: 6a071ccf253f572a8ec14e81
+[2026-05-19 18:05:79] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 18:05:80] INFO : Incoming request: GET /profile
+[2026-05-19 18:05:96] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:78] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:92] INFO : Incoming request: POST /login
+[2026-05-19 19:05:93] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-19 19:05:15] INFO : User logged in successfully: 6a071ccf253f572a8ec14e81
+[2026-05-19 19:05:26] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:29] INFO : Incoming request: GET /profile
+[2026-05-19 19:05:49] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:23] INFO : Incoming request: POST /login
+[2026-05-19 19:05:25] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-19 19:05:37] INFO : User logged in successfully: 6a071ccf253f572a8ec14e81
+[2026-05-19 19:05:49] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:53] INFO : Incoming request: GET /profile
+[2026-05-19 19:05:51] INFO : Incoming request: GET /profile
+[2026-05-19 19:05:67] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:02] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:76] INFO : Incoming request: POST /login
+[2026-05-19 19:05:78] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-19 19:05:07] INFO : User logged in successfully: 6a071ccf253f572a8ec14e81
+[2026-05-19 19:05:17] INFO : Incoming request: GET /profile
+[2026-05-19 19:05:19] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:99] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:05] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:17] INFO : Incoming request: POST /login
+[2026-05-19 19:05:18] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-19 19:05:36] INFO : User logged in successfully: 6a071ccf253f572a8ec14e81
+[2026-05-19 19:05:47] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:49] INFO : Incoming request: GET /profile
+[2026-05-19 19:05:09] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:62] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:77] INFO : Incoming request: POST /login
+[2026-05-19 19:05:79] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-19 19:05:75] INFO : Incoming request: POST /login
+[2026-05-19 19:05:75] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-19 19:05:92] INFO : User logged in successfully: 6a071ccf253f572a8ec14e81
+[2026-05-19 19:05:03] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:05] INFO : Incoming request: GET /profile
+[2026-05-19 19:05:24] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:70] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:51] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:69] INFO : Incoming request: POST /login
+[2026-05-19 19:05:70] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-19 19:05:89] INFO : User logged in successfully: 6a071ccf253f572a8ec14e81
+[2026-05-19 19:05:99] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:00] INFO : Incoming request: GET /profile
+[2026-05-19 19:05:21] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:05] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:74] INFO : Incoming request: POST /login
+[2026-05-19 19:05:75] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-19 19:05:94] INFO : User logged in successfully: 6a071ccf253f572a8ec14e81
+[2026-05-19 19:05:07] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:08] INFO : Incoming request: GET /profile
+[2026-05-19 19:05:23] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:35] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:23] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:36] INFO : Incoming request: POST /login
+[2026-05-19 19:05:37] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-19 19:05:57] INFO : User logged in successfully: 6a071ccf253f572a8ec14e81
+[2026-05-19 19:05:69] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:71] INFO : Incoming request: GET /profile
+[2026-05-19 19:05:88] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:90] INFO : Incoming request: GET /profile
+[2026-05-19 19:05:19] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:49] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:86] INFO : Incoming request: POST /login
+[2026-05-19 19:05:87] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-19 19:05:09] INFO : User logged in successfully: 6a071ccf253f572a8ec14e81
+[2026-05-19 19:05:21] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:25] INFO : Incoming request: GET /profile
+[2026-05-19 19:05:38] INFO : Incoming request: GET /profile
+[2026-05-19 19:05:40] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:51] INFO : Incoming request: GET /profile
+[2026-05-19 19:05:55] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:48] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:61] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:28] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:82] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:05] INFO : Incoming request: POST /login
+[2026-05-19 19:05:06] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-19 19:05:24] INFO : User logged in successfully: 6a071ccf253f572a8ec14e81
+[2026-05-19 19:05:35] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:37] INFO : Incoming request: GET /profile
+[2026-05-19 19:05:39] INFO : Incoming request: GET /profile
+[2026-05-19 19:05:42] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:48] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:97] INFO : Incoming request: POST /login
+[2026-05-19 19:05:99] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-19 19:05:28] INFO : User logged in successfully: 6a071ccf253f572a8ec14e81
+[2026-05-19 19:05:46] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:49] INFO : Incoming request: GET /profile
+[2026-05-19 19:05:73] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:36] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:38] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:14] INFO : Incoming request: POST /login
+[2026-05-19 19:05:16] INFO : Login attempt for email: ahmadrazauch15@gmail.com
+[2026-05-19 19:05:38] INFO : User logged in successfully: 6a071ccf253f572a8ec14e81
+[2026-05-19 19:05:48] INFO : Incoming request: GET /profile
+[2026-05-19 19:05:63] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:75] INFO : Incoming request: GET /profile
+[2026-05-19 19:05:79] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:43] INFO : Incoming request: GET /profile
+[2026-05-19 19:05:50] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-05-19 19:05:41] INFO : Incoming request: GET /profile
+[2026-05-19 19:05:50] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json

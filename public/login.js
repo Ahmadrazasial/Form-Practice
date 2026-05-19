@@ -177,8 +177,8 @@ async function loginApi() {
                     }
                 }else{
 
-                    const jwtToken = dataRet.token
-                    localStorage.setItem("token",jwtToken)
+                    // const jwtToken = dataRet.token
+                    // localStorage.setItem("token",jwtToken)
                     loginForm.reset()
                     userFlag.src = ""
                     userFlag.dataset.iso = ""
