@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Login now</title>
+</head>
+
+<body>
+    <div class="container w-auto mx-auto border-2 border-amber-700">
+        <div class="formSection w-4/6 flex flex-col items-center border mx-auto gap-5 p-5" id="lgformSec">
+            <h1 class="text-4xl font-bold text-black ">Log in</h1>
+            <form action="" id="login" class="w-full flex flex-col justify-center items-center gap-10" novalidate>
+                <div class="field w-4/5 block" id="lgemailSec">
+                    <input type="email" name="contact" id="email" placeholder="Email"
+                        class="w-full border py-3 px-5 text-2xl rounded-2xl">
+                    <span id="lgemailerror" class="errSpan text-sm text-red-600 hidden" data-for="email"></span>
+                </div>
+                <div class="field w-4/5 relative hidden" id="lgnumberSec">
+                    <div class="countries w-[300px] border h-0  flex visible opacity-0 flex-col overflow-y-scroll  absolute py-3 invisible  -top-0 bg-white z-30 transition-all ease-in "
+                        id="countries">
+
+                    </div>
+                    <div class="border rounded-2xl flex w-full" id="fullNumber">
+
+                        <!-- <div class="wraper w-1/6  "> -->
+                        <span
+                            class="userCountry w-1/6  text-2xl text-center flex items-center justify-center cursor-pointer  h-auto self-center z-20"
+                            id="userCountry">
+                            <img src="" alt="" id="countryFlag" class="w-10 h-6" data-iso="">
+                            &darr;
+                        </span>
+
+                        <!-- </div> -->
+                        <input type="tel" name="phoneNumber" id="phone" placeholder="Phone"
+                            class="w-5/6 py-3 px-5  text-2xl rounded-r-2xl focus:outline-0">
+                    </div>
+                    <div class=" flex gap-10">
+                        <span id="codeerror" class="errSpan text-sm text-red-600 hidden" data-for="userCountry"></span>
+                        <span id="numbererror" class="errSpan text-sm text-red-600 hidden" data-for="phone"></span>
+                    </div>
+                </div>
+                <div class="field w-4/5" id="lgpasswordSec">
+                    <input type="password" name="password" id="password" placeholder="Password"
+                        class="w-full border py-3 px-5 text-2xl rounded-2xl ">
+                    <span id="lgpasserror" class="errSpan text-sm text-red-600 hidden" data-for="password"></span>
+                </div>
+                <span id="authError" class="errSpan text-md text-red-600 hidden" data-for=""></span>
+                <button type="submit" id="loginSubmit" class="w-4/5 border py-3 px-5 text-2xl font-bold
+                 rounded-2xl cursor-pointer bg-emerald-700 text-white">Submit</button>
+                <button type="button" onclick="toggleMode()" class="cursor-pointer" id="toggleBtn">
+                    Login with phone instead
+                </button>
+                <div class="loginPage flex" id="redirectLg">
+                    <p>Dont have account ?</p>
+                    <a href="signup.html" class="text-blue-600 underline px-2">Signup</a>
+                 </div>
+            </form>
+        </div>
+    </div>
+    
+     <script src="utils.js"></script>
+     <script src="login.js"></script>
+    <script src="country.js"></script>
+    
+   
+</body>
+
+</html>
