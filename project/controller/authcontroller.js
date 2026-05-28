@@ -181,3 +181,7 @@ export const  getProfile = async (req,res)=> {
     }
 }
 
+export const forgot = (req,res) =>{
+    const email = req.body;
+    console.log(email)
+}

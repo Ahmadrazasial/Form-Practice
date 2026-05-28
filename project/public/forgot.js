@@ -78,4 +78,32 @@ function lgemailVal() {
 const requiredFields = [emailInput];
 const validationArr = [lgemailVal];
 
-inputClear(requiredFields, validationArr);
+// inputClear(requiredFields, validationArr);
+
+
+async function recoverAccount() {
+
+    forgotForm?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (!lgemailVal()) {
+            return false;
+        }
+        try {
+        let formdata = {};
+        let email = emailInput.value.trim();
+        formdata.email = email
+        const res = await fetch("/api/auth/forgot", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formdata)
+        })
+        const data = await res.json(); 
+        console.log(data)
+    } catch (error) {
+        console.log("Error ", error)
+    }
+    })
+    
+
+}
+recoverAccount()
