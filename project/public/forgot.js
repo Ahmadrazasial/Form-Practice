@@ -78,7 +78,7 @@ function lgemailVal() {
 const requiredFields = [emailInput];
 const validationArr = [lgemailVal];
 
-// inputClear(requiredFields, validationArr);
+inputClear(requiredFields, validationArr);
 
 
 async function recoverAccount() {

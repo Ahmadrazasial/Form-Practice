@@ -21,7 +21,7 @@ export  const signupValidate = [
     body("number").
     trim().
     notEmpty().withMessage("Phone number is required").
-    isLength(6).withMessage("Phone number must be 7 digits long"),
+    isLength(7).withMessage("Phone number must be 7 digits long"),
 
     //Email
     body("email").trim()

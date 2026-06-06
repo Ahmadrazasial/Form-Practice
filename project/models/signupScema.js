@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
+import { type } from "os";
 
 
 
@@ -30,6 +31,12 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    resetPasswordToken:{
+        type:String
+    },
+    resetPasswordExpiry:{
+        type:Number
     }
 }, { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } })
 
