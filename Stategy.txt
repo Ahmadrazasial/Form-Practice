@@ -1,4 +1,4 @@
-⚠️ STRONGLY RECOMMENDED
+ ⚠️ STRONGLY RECOMMENDED
 
 Race-condition safety (rely on DB unique index, not only findOne)
 

@@ -2362,3 +2362,21 @@
 [2026-05-19 19:05:50] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
 [2026-05-19 19:05:41] INFO : Incoming request: GET /profile
 [2026-05-19 19:05:50] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-06-07 18:06:68] INFO : Incoming request: POST /api/auth/forgot
+[2026-06-07 18:06:89] INFO : Incoming request: GET /reset-password/7def7bbff38b11f8cf264f897bc4a421f93c42daa644ab9046555ef3f150579a
+[2026-06-07 18:06:07] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-06-07 18:06:73] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-06-07 18:06:18] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-06-07 18:06:37] INFO : Incoming request: POST /api/auth/signup
+[2026-06-07 18:06:37] INFO : Signup attempt for email: ahmadrazauch13@gmail.com
+[2026-06-07 18:06:38] INFO : Incoming request: POST /api/auth/signup
+[2026-06-07 18:06:38] INFO : Signup attempt for email: onlinequrancenter79@gmail.com
+[2026-06-07 18:06:45] INFO : User created successfully: onlinequrancenter79@gmail.com
+[2026-06-07 18:06:30] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-06-07 18:06:61] INFO : Incoming request: POST /api/auth/login
+[2026-06-07 18:06:61] INFO : Login attempt for email: onlinequrancenter79@gmail.com
+[2026-06-07 18:06:29] INFO : Incoming request: POST /api/auth/login
+[2026-06-07 18:06:29] INFO : Login attempt for email: onlinequrancenter79@gmail.com
+[2026-06-07 18:06:50] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-06-07 18:06:94] INFO : Incoming request: POST /api/auth/forgot
+[2026-06-07 18:06:94] INFO : Incoming request: POST /api/auth/forgot

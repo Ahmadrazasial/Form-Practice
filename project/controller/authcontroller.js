@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import jwt from "jsonwebtoken";
 import crypto from "crypto"
 import mongoose from "mongoose";
+import { sendMail } from "../utils/sendmail.js";
 
 
 
@@ -194,9 +195,14 @@ export const forgot = async (req, res) => {
         async function sendLink(user) {
             const buffer = crypto.randomBytes(32);
             const token = buffer.toString('hex')
+           
+           const resetLink = `http://localhost:3000/reset-password/${token}`;
+           const html = `click here to reset ur password \n ${resetLink}`
+           await sendMail(user.email,"Password Reset","Reset your password",html)
+           
             const hash = crypto.createHash('sha256').update(token).digest('hex')
             const expiry = Date.now() + 15 * 60 * 1000
-
+            
             user.resetPasswordToken = hash;
             user.resetPasswordExpiry = expiry;
             await user.save();
@@ -217,6 +223,10 @@ export const forgot = async (req, res) => {
             })
         } else {
             await sendLink(userCheck)
+            return res.status(200).json({
+                success: true,
+                message: "link sent"
+            })
         }
     } catch (error) {
         return res.status(500).json({

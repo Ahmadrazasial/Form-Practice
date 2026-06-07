@@ -10,6 +10,7 @@ import cookieParser from "cookie-parser";
 import logger from "./utils/logger.js";
 const app = express();
 const port = process.env.HOST_PORT;
+// console.log(port)
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -37,4 +38,4 @@ app.use("/api/auth/", router)
 app.listen(port, () => {
     console.log(`Server running on ${port}`);
 })
-
+console.log("working")
