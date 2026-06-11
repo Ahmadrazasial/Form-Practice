@@ -1,0 +1,20 @@
+[33m35e5bbf[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{0}: reset: moving to 35e5bbf
+[33m1ab0853[m HEAD@{1}: reset: moving to HEAD
+[33m1ab0853[m HEAD@{2}: commit: email sending via nodemailer is completed
+[33m35e5bbf[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{3}: commit: created token and saved
+[33m6d3f2d4[m HEAD@{4}: commit: frontend validation done
+[33m23d571b[m HEAD@{5}: commit: client side forgot pages
+[33mb0952aa[m HEAD@{6}: commit: planned for forgot password and also structures the code
+[33mcb5389c[m HEAD@{7}: commit: used jwt with cookie
+[33ma3db95f[m HEAD@{8}: commit: deleed module files
+[33mfe8a8be[m HEAD@{9}: commit: web token created
+[33m248c711[m HEAD@{10}: commit: login logic completed
+[33mae704f2[m HEAD@{11}: commit: authentication on server side
+[33macbb21d[m HEAD@{12}: commit: server side validation completed in login form
+[33m8968a54[m HEAD@{13}: commit: validated login on frontent
+[33mae6e3fd[m HEAD@{14}: commit: login validate incomplete
+[33m08b9325[m HEAD@{15}: commit: validated at server side
+[33m2350621[m HEAD@{16}: commit: added post reqest for login form
+[33mff10bce[m HEAD@{17}: commit: removed error of signup comming to login form
+[33m46bb380[m HEAD@{18}: commit: started again
+[33mc6b9715[m HEAD@{19}: clone: from https://github.com/Ahmadrazasial/Form-Practice.git

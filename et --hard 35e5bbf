@@ -1,0 +1,31 @@
+[33m1ab0853[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m email sending via nodemailer is completed
+[33m35e5bbf[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m  created token and saved
+[33m6d3f2d4[m frontend validation done
+[33m23d571b[m client side forgot pages
+[33mb0952aa[m planned for forgot password and also structures the code
+[33mcb5389c[m used jwt with cookie
+[33ma3db95f[m deleed module files
+[33mfe8a8be[m web token created
+[33m248c711[m login logic completed
+[33mae704f2[m authentication on server side
+[33macbb21d[m server side validation completed in login form
+[33m8968a54[m validated login on frontent
+[33mae6e3fd[m login validate  incomplete
+[33m08b9325[m validated at server side
+[33m2350621[m added post reqest for login form
+[33mff10bce[m removed error of signup comming to login form
+[33m46bb380[m started again
+[33mc6b9715[m Just added login file
+[33m05aa36d[m committed
+[33ma195e7d[m solved tel validation and auto selection
+[33mbb551f3[m added phone number differently
+[33m46b0d7a[m styled country code part
+[33m7de5e9d[m finalized scripting
+[33m296f99f[m change code snippet
+[33m9e16887[m fully validated frontend
+[33m681cde2[m did some styling and validated a bit on front end
+[33md3d73ce[m finalize server side scripting
+[33ma570fab[m Added contine.dev for helping without switching to browser
+[33mef1f097[m added some validations and senitized
+[33m30c3df0[m just does a bit of validation
+[33m0d85d4b[m Created a full stack form and a post request sent

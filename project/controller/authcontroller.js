@@ -1,4 +1,4 @@
-import { User } from "../models/signupScema.js";
+import {  User } from "../models/signupScema.js";
 import logger from "../utils/logger.js";
 import bcrypt from "bcrypt";
 import cookieParser from "cookie-parser";
@@ -234,4 +234,26 @@ export const forgot = async (req, res) => {
             message: "server error" + error
         })
     }
+}
+
+export const updatePass = async (req , res)=>{
+// console.log("req rec")
+
+const token = req.params.token;
+const hash = crypto.createHash('sha256').update(token).digest('hex')
+console.log(hash)
+
+const user = await User.findOne({resetPasswordToken:hash})
+console.log(user)
+if(!user || user.resetPasswordExpiry < Date.now()){
+    return res.status(410).json({
+        success:false,
+        message:"Reset Token is inavlid or expired"
+    })
+}
+
+
+
+console.log(token)
+
 }

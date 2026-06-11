@@ -35,6 +35,9 @@ const connect = await mongoose.connect(process.env.DB_URL);
 
 app.use(cookieParser());
 app.use("/api/auth/", router)
+app.get("/reset-password/:token",(req,res)=>{
+    res.sendFile(path.join(__dirname,"public","reset-password.html"))
+})
 app.listen(port, () => {
     console.log(`Server running on ${port}`);
 })
