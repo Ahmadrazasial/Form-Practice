@@ -238,6 +238,7 @@ export const forgot = async (req, res) => {
 
 export const updatePass = async (req , res)=>{
 // console.log("req rec")
+try{
 
 const token = req.params.token;
 const hash = crypto.createHash('sha256').update(token).digest('hex')
@@ -250,10 +251,25 @@ if(!user || user.resetPasswordExpiry < Date.now()){
         success:false,
         message:"Reset Token is inavlid or expired"
     })
+    console.log(token)
+}else{
+    const { password }  = req.body;
+    user.password = password;
+    console.log(user.password)
+    await user.save();
+    return res.status(200).json({
+        success: true,
+        message: "Password updated successfully"
+    })
+
 }
 
+}catch(error){
+    return res.status(500).json({
+        success:false,
+        message:"server error"
+    })
 
 
-console.log(token)
-
+}
 }

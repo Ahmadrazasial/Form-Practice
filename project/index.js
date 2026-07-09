@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-dotenv.config();
+
 import express from "express";
 import mongoose from "mongoose";
 import path from "path"
@@ -9,12 +9,17 @@ import router from "./routes/authroutes.js";
 import cookieParser from "cookie-parser";
 import logger from "./utils/logger.js";
 const app = express();
-const port = process.env.HOST_PORT;
-// console.log(port)
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+//Configuring dotenv to load environment variables from .env file
+
+dotenv.config({
+    path: path.join(__dirname, "../.env")
+});
+
+const port = process.env.HOST_PORT;
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(cors(

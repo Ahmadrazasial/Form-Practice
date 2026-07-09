@@ -1,9 +1,17 @@
 import dotenv from "dotenv";
+import path from "path"
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({
+    path: path.join(__dirname, "../../.env")
+});
+
 import nodemailer from "nodemailer"
 import  pkg   from "winston";
 const { info  } = pkg;
-
-dotenv.config();
 
 const appUser = process.env.EMAIL_USER;
 const appPass = process.env.EMAIL_PASS;
@@ -21,14 +29,14 @@ const transporter = nodemailer.createTransport({
 })
 export const sendMail = async (to ,subject,text,html) =>{
 try {
-    transporter.sendMail({
-        from:`TOP Coder ${appUser}`,
+   const info = await transporter.sendMail({
+        from:`TOP Coder <${appUser}>`,
         to:to,
         subject:subject,
         text:text,
         html:html
     })
-    // console.log("Email Sent" , info.messageid);
+    console.log("Email Sent" , info.messageId);
     return info
 } catch (error) {
     console.error("Email error:", error);
