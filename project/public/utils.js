@@ -41,7 +41,7 @@ if (phoneDiv) {
     })
 }
 
-function successMs(msg,formsSec) {
+function successMs(msg,formsSec,a) {
     const successSec = document.createElement("div")
     successSec.className = "successful";
     const greet = document.createElement("img")
@@ -59,7 +59,7 @@ function successMs(msg,formsSec) {
 
         successSec.remove();
 
-        formsSec.style.display = "flex";
+        window.location.href = a;
     })
     successSec.append(greet, text, link);
     return successSec;

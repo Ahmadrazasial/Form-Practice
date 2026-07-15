@@ -188,9 +188,11 @@ async function loginApi() {
                     userFlag.src = ""
                     userFlag.dataset.iso = ""
                     const msg = dataRet.message;
-                    window.location.href = "/profile.html"
+                    lgFormSec.style.display = "none";
+                    const href = "/profile.html"
 
                     // document.getElementById("#container").append(successMs(msg))
+                    lgFormSec.parentElement.append(successMs(msg,lgFormSec,href))
                     
                 }
 
