@@ -2,7 +2,9 @@ console.log("Working");
 const resetForm = document.getElementById("reset")
 const passInput = document.getElementById("password")
 const cnfmInput = document.getElementById("confirm");
-
+const passField = document.getElementById("passField");
+const confField = document.getElementById("confirmField");
+const showPass = document.querySelectorAll("#view");
 
 
 function validatePassword() {
@@ -50,6 +52,13 @@ const validationArr = [validatePassword, validateConfirm];
 
 
 inputClear(requiredFields, validationArr);
+const inputsArray = [passInput,cnfmInput];
+const showArray = Array.from(showPass);
+const fieldArray = [passField,confField];
+// console.log(passInputField)
+
+togglePassword(showArray,inputsArray)
+inputFocus(fieldArray)
 
 function Validate() {
     return validationArr.map(field => field()).every(Boolean);

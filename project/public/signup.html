@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup / Login</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="src/style.css">
 </head>
 
 <body>
     <div class="container w-auto mx-auto border-2 border-amber-700">
-        <div class="formSection w-4/6 flex flex-col items-center border mx-auto gap-5 p-5" id="spformSec">
+        <div class="formSection w-4/6 flex flex-col items-center  border mx-auto gap-5 p-5" id="spformSec">
             <h1 class="text-4xl font-bold text-black ">Sign Up</h1>
             <form action="" id="signup" class="w-full flex flex-col justify-center items-center gap-10">
                 <div class="field w-4/5 " id="firstSec">
@@ -53,13 +53,19 @@
                     <span id="emailerror" class="errSpan text-sm text-red-600 hidden" data-for="email"></span>
                 </div>
                 <div class="field w-4/5" id="passwordSec">
+                    <div class="input border 1px solid black flex rounded-2xl" id="passField">
                     <input type="password" name="password" id="password" placeholder="Password"
-                        class="w-full border py-3 px-5 text-2xl rounded-2xl ">
+                        class="w-full  py-3 px-5 text-2xl focus:outline-0 ">
+                        <img class="max-w-5 mx-2 cursor-pointer" id="view" src="images/show.svg" alt="show password" >
+                        </div>
                     <span id="passerror" class="errSpan text-sm text-red-600 hidden" data-for="password"></span>
                 </div>
                 <div class="field w-4/5" id="confirmSec">
+                    <div class="input border 1px solid black flex rounded-2xl" id="confirmField">
                     <input type="password" name="confirm" id="confirm" placeholder="Confirm Password"
-                        class="w-full border py-3 px-5 text-2xl rounded-2xl">
+                        class="w-full py-3 px-5 text-2xl focus:outline-0">
+                        <img class="max-w-5 mx-2 cursor-pointer" id="view" src="images/show.svg" alt="show password" >
+                        </div>
                     <span id="cnfmerror" class="errSpan text-sm text-red-600 hidden" data-for="confirm"></span>
                 </div>
                 <button type="submit" id="signupSubmit" class="w-4/5 border py-3 px-5 text-2xl font-bold

@@ -12,11 +12,16 @@ const spForm = document.getElementById("signup");
 const errSpans = document.querySelectorAll(".errSpan");
 const countryList = document.getElementById("countries");
 const userFlag = document.getElementById("countryFlag")
+const passField = document.getElementById("passField");
+const confField = document.getElementById("confirmField");
+const showPass = document.querySelectorAll("#view");
 
-// console.log(Email)
+
+// console.log(Array.from(showPass))
 
 
-
+// spformsSec.parentElement.append(successMs("successful",spformsSec,"/"))
+// spformsSec.style.display = "none"
 
 const requiredFields = [Firstname, Lastname, userCountry, Phone, Email, Password, Confirm];
 
@@ -137,6 +142,14 @@ function Validate() {
 
 inputClear(requiredFields, validationArr);
 
+
+const inputsArray = [Password,Confirm];
+const showArray = Array.from(showPass);
+const fieldArray = [passField,confField];
+// console.log(passInputField)
+
+togglePassword(showArray,inputsArray)
+inputFocus(fieldArray)
 
 async function signupApi() {
     const signupform = document.getElementById("signup");

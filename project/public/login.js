@@ -11,9 +11,11 @@ const lgPhone = loginForm.querySelector("#lgnumberSec")
 const phoneInput = lgPhone.querySelector("#phone")
 const lgPassword = loginForm.querySelector("#lgpasswordSec")
 const passInput = lgPassword.querySelector("#password")
+const togglePass = lgPassword.querySelector("#view")
+const passInputField = lgPassword.querySelector("#passField")
 const toggleBtn = loginForm.querySelector("#toggleBtn")
 const authSpan = loginForm.querySelector("#authError")
-// console.log(loginForm)
+console.log(togglePass,passInput)
 
 let mode = "email"
 function toggleMode() {
@@ -145,6 +147,15 @@ field.addEventListener("input",()=>{
     clearAuthErr(authSpan)
 })
 })
+
+const inputsArray = [passInput];
+const showArray = [togglePass];
+const fieldArray = [passInputField];
+console.log(passInputField)
+
+togglePassword(showArray,inputsArray)
+inputFocus(fieldArray)
+
 async function loginApi() {
     // let loginForm = document.getElementById("login");
     if (loginForm) {

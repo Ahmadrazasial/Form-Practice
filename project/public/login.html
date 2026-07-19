@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="src/style.css">
     <title>Login now</title>
 </head>
 
@@ -43,8 +43,11 @@
                     </div>
                 </div>
                 <div class="field w-4/5" id="lgpasswordSec">
-                    <input type="password" name="password" id="password" placeholder="Password"
-                        class="w-full border py-3 px-5 text-2xl rounded-2xl ">
+                    <div class=" border  rounded-2xl black flex" id="passField">
+                    <input onfocus="" type="password" name="password" id="password" placeholder="Password"
+                        class="w-full py-3 px-5 text-2xl rounded-2xl focus:outline-0">
+                        <img class="max-w-5 mx-2 cursor-pointer" id="view" src="images/show.svg" alt="show password" >
+                        </div>
                     <span id="lgpasserror" class="errSpan text-sm text-red-600 hidden" data-for="password"></span>
                     
                 </div>

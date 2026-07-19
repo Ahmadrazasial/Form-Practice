@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+
+@layer components {
+    .option{
+        @apply w-full text-sm px-5 py-1 
+    }
+.select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+.country{
+    @apply flex w-full gap-3 items-center text-lg  cursor-pointer hover:bg-blue-100 py-2 px-3
+}
+.countryFlag{
+    @apply w-10 h-6
+}
+.countryName{
+    @apply text-lg
+}
+.countries{
+    scrollbar-width:thin;
+}
+#toggleBtn:hover{
+    transform: scale(1.1);
+    transition: all .1s ease;
+}
+}
+.outline{
+    outline: 1.5px solid #007A55;
+}
+
+.successful{
+    @apply w-4/6 flex flex-col items-center justify-center  border mx-auto gap-5 p-5
+}
+.greet{
+    @apply w-1/6
+}
+.text{
+    @apply text-3xl text-[#007A55] font-['Times_New_Roman']
+}
+
+.redirect{
+    @apply text-xl bg-emerald-700 text-white px-5 py-2 rounded-xl cursor-pointer font-bold
+ }
+ .redirect:hover{
+     transform: scale(1.05);
+    transition: all .1s ease;
+ }

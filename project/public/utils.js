@@ -43,6 +43,7 @@ if (phoneDiv) {
 
 function successMs(msg,formsSec,a) {
     const successSec = document.createElement("div")
+    successSec.style.display = "flex"
     successSec.className = "successful";
     const greet = document.createElement("img")
     greet.className = "greet";
@@ -65,3 +66,40 @@ function successMs(msg,formsSec,a) {
     return successSec;
 }
 
+function togglePassword(icons,inputs) {
+icons.forEach((icon,index) =>{
+    icon.addEventListener("click",() => {
+        const input = inputs[index]
+        // console.log(input.type)
+        if(input.type === "password"){
+            input.type = "text";
+            icon.src = "/images/hide.svg";
+            // console.log(input.type)
+        }else {
+            icon.src = "/images/show.svg";
+             input.type = "password";
+            // console.log(input.type)
+        }
+    })
+})
+}
+
+function inputFocus(fields) {
+fields.forEach((field)=>{
+    field.style.borderColor = "#007A55"
+         field.addEventListener("focusin", () => {
+        field.classList.add("outline");
+    })
+
+    field.addEventListener("focusout", () => {
+      field.classList.remove("outline");
+    })
+    })
+}
+
+const inputs = document.getElementsByTagName("input");
+
+Array.from(inputs).forEach(input =>{
+    input.style.color = "#007A55"
+    input.style.outlineColor = "#007A55" 
+})
