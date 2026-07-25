@@ -1,35 +1,45 @@
 
-    (async function () {
-        try {
-            const API = await fetch("https://restcountries.com/v3.1/all?fields=name,flags,idd,cca2")
-            const apiData = await API.json()
-            apiData.forEach(country => {
-                const div = document.createElement("div");
-                div.className = "country";
-                div.dataset.iso = country.cca2
-                div.dataset.name = country.name.common;
-                div.dataset.dial = country.idd.root + (country.idd.suffixes?.[0] || "");
-                div.dataset.flag = country.flags.svg;
-                const countryflag = document.createElement("img")
-                countryflag.className = "countryFlag";
-                countryflag.src = country.flags.svg;
-                const countryName = document.createElement("span")
-                countryName.className = "countryName";
-                countryName.textContent = country.name.common;
-                countryName.dataset = country.name.common;
-                const countryDial = document.createElement("span")
-                countryDial.className = "countryDial";
-                countryDial.textContent = country.idd.root + (country.idd.suffixes?.[0] || "");
-                div.append(countryflag, countryName, countryDial)
-                if (countryList) {
-                    countryList.append(div)
-                }
-                // console.log(country.idd)
-            })
-        } catch (error) {
-            console.log("Err", error)
-        }
-    })()
+(async function () {
+    try {
+        // const response = await fetch(
+        //     'https://api.restcountries.com/countries/v5',
+        //     { headers: { 'Authorization': 'Bearer rc_live_0205526ed844424e973ea3bcd6fc8281' } }
+        // );
+
+        // const data = await response.json();
+        fetch(
+  'https://api.restcountries.com/countries/v5?q=canada',
+  { headers: { 'Authorization': 'Bearer rc_live_0205526ed844424e973ea3bcd6fc8281' } }
+)
+  .then(function (response) { return response.json(); })
+  .then(function (data) { console.log(data); });
+        // data.forEach(country => {
+        //     const div = document.createElement("div");
+        //     div.className = "country";
+        //     div.dataset.iso = country.cca2
+        //     div.dataset.name = country.name.common;
+        //     div.dataset.dial = country.idd.root + (country.idd.suffixes?.[0] || "");
+        //     div.dataset.flag = country.flags.svg;
+        //     const countryflag = document.createElement("img")
+        //     countryflag.className = "countryFlag";
+        //     countryflag.src = country.flags.svg;
+        //     const countryName = document.createElement("span")
+        //     countryName.className = "countryName";
+        //     countryName.textContent = country.name.common;
+        //     countryName.dataset = country.name.common;
+        //     const countryDial = document.createElement("span")
+        //     countryDial.className = "countryDial";
+        //     countryDial.textContent = country.idd.root + (country.idd.suffixes?.[0] || "");
+        //     div.append(countryflag, countryName, countryDial)
+        //     if (countryList) {
+        //         countryList.append(div)
+        //     }
+        //     // console.log(country.idd)
+        // })
+    } catch (error) {
+        console.log("Err", error)
+    }
+})()
 
 if (userCountry) {
     userCountry.addEventListener("click", (e) => {

@@ -219,13 +219,13 @@ export const forgot = async (req, res) => {
         if (!userCheck) {
             return res.status(400).json({
                 success: false,
-                message: "not found"
+                message: "Unable to send the password reset email. Please try again later."
             })
         } else {
             await sendLink(userCheck)
             return res.status(200).json({
                 success: true,
-                message: "link sent"
+                message: "If an account with that email exists, a password reset link has been sent"
             })
         }
     } catch (error) {

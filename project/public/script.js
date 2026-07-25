@@ -210,7 +210,7 @@ async function signupApi() {
                     console.log(message);
                     spformsSec.style.display = "none";
                     const href = "/login.html"
-                    spformsSec.parentElement.append(successMs(message,spformsSec,href))
+                    spformsSec.parentElement.append(successMs(message,spformsSec,href,"Login"))
                 }
 
             } catch (error) {
@@ -220,7 +220,7 @@ async function signupApi() {
         })
     }
 }
-
+spformsSec.parentElement.append(successMs("signed up",spformsSec,"/","Sigup"))
 signupApi()
 
 

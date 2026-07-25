@@ -49,3 +49,6 @@
      transform: scale(1.05);
     transition: all .1s ease;
  }
+ .resend-text{
+    @apply text-blue-600 underline px-2 cursor-pointer
+ }

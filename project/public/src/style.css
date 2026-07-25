@@ -497,6 +497,12 @@
   transform: scale(1.05);
   transition: all .1s ease;
 }
+.resend-text {
+  cursor: pointer;
+  padding-inline: calc(var(--spacing) * 2);
+  color: var(--color-blue-600);
+  text-decoration-line: underline;
+}
 @property --tw-border-style {
   syntax: "*";
   inherits: false;

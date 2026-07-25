@@ -1,8 +1,9 @@
 console.log("connected")
-const forgotFormSec = document.getElementById("forgotformSec")
+const forgotFormSec = document.getElementById("forgotFormSec")
 const forgotForm = document.getElementById("forgot");
 const forgotEmail = forgotForm?.querySelector("#forgotemailSec");
 const emailInput = forgotEmail.querySelector("#email")
+
 // const countryList = document.getElementById("countries");
 // const userCountry = document.getElementById("userCountry");
 // const userFlag = document.getElementById("countryFlag")
@@ -83,27 +84,49 @@ inputClear(requiredFields, validationArr);
 
 async function recoverAccount() {
 
-    forgotForm?.addEventListener("submit", async (e) => {
-        e.preventDefault();
+   
+    
         if (!lgemailVal()) {
             return false;
         }
         try {
-        let formdata = {};
-        let email = emailInput.value.trim();
-        formdata.email = email
-        const res = await fetch("/api/auth/forgot", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formdata)
-        })
-        const data = await res.json(); 
-        console.log(data)
-    } catch (error) {
-        console.log("Error ", error)
-    }
-    })
-    
+            let formdata = {};
+            let email = emailInput.value.trim();
+            formdata.email = email
+            const res = await fetch("/api/auth/forgot", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formdata)
+            })
+            const data = await res.json();
+            const msg = data.message
+            const back = "/forgot-password.html"
+            const mail = 'https://google.com'
+            if (data.success === false) {
+                document.querySelector(".successful")?.remove();
+                forgotFormSec.parentElement.append(successMs(msg, forgotFormSec, "Go Back",back,false,true))
+            } else {
+                document.querySelector(".successful")?.remove();
+                forgotFormSec.parentElement.append(successMs(msg, forgotFormSec, mail,"Open Mail",true,true))
+            }
+        } catch (error) {
+            console.log("Error ", error)
+        }
+   
+    // forgotFormSec.parentElement.append(successMs("yes", forgotFormSec, "/","Open Mail",true,true))
+
 
 }
+ forgotForm?.addEventListener("submit", async (e) => {
+    e.preventDefault()
 recoverAccount()
+ })
+// document.addEventListener("click", (e) => {
+//   if (e.target.matches(".resend-text")) {
+//     forgotFormSec.parentElement.append("")
+//     e.preventDefault();
+// 
+//     console.log("clicked")
+//     recoverAccount()
+//   }
+// });document.querySelector(".successful")?.remove();
