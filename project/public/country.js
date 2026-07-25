@@ -1,41 +1,52 @@
 
 (async function () {
     try {
-        // const response = await fetch(
-        //     'https://api.restcountries.com/countries/v5',
-        //     { headers: { 'Authorization': 'Bearer rc_live_0205526ed844424e973ea3bcd6fc8281' } }
-        // );
+        const response = await fetch(
+            'https://api.restcountries.com/countries/v5',
+            {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer rc_live_9a776bbf3e264cb6a5416216dc1f8b5c',
+                    'Content-Type': 'application/json'
+                }
 
-        // const data = await response.json();
-        fetch(
-  'https://api.restcountries.com/countries/v5?q=canada',
-  { headers: { 'Authorization': 'Bearer rc_live_0205526ed844424e973ea3bcd6fc8281' } }
-)
-  .then(function (response) { return response.json(); })
-  .then(function (data) { console.log(data); });
-        // data.forEach(country => {
-        //     const div = document.createElement("div");
-        //     div.className = "country";
-        //     div.dataset.iso = country.cca2
-        //     div.dataset.name = country.name.common;
-        //     div.dataset.dial = country.idd.root + (country.idd.suffixes?.[0] || "");
-        //     div.dataset.flag = country.flags.svg;
-        //     const countryflag = document.createElement("img")
-        //     countryflag.className = "countryFlag";
-        //     countryflag.src = country.flags.svg;
-        //     const countryName = document.createElement("span")
-        //     countryName.className = "countryName";
-        //     countryName.textContent = country.name.common;
-        //     countryName.dataset = country.name.common;
-        //     const countryDial = document.createElement("span")
-        //     countryDial.className = "countryDial";
-        //     countryDial.textContent = country.idd.root + (country.idd.suffixes?.[0] || "");
-        //     div.append(countryflag, countryName, countryDial)
-        //     if (countryList) {
-        //         countryList.append(div)
-        //     }
-        //     // console.log(country.idd)
-        // })
+            }
+        )
+
+        const data = await response.json();
+        const countries = data.data.objects
+        console.log(countries)
+
+
+        countries.forEach(country => {
+            console.log(country)
+            const div = document.createElement("div");
+            div.className = "country";
+            console.log(`+${country.calling_codes[0]}`)
+            const iso = country.codes.alpha_2;
+            const name = country.names.common;
+            const dial = `+${country.calling_codes[0]}`;
+            const flag = country.flag.url_svg;
+            div.dataset.iso = iso
+            div.dataset.name = name;
+            div.dataset.dial = dial;
+            div.dataset.flag = flag;
+            const countryflag = document.createElement("img")
+            countryflag.className = "countryFlag";
+            countryflag.src = flag;
+            const countryName = document.createElement("span")
+            countryName.className = "countryName";
+            countryName.textContent = name;
+            countryName.dataset = name;
+            const countryDial = document.createElement("span")
+            countryDial.className = "countryDial";
+            countryDial.textContent = dial;
+            div.append(countryflag, countryName, countryDial)
+            if (countryList) {
+                countryList.append(div)
+            }
+            // console.log(country.idd)
+        })
     } catch (error) {
         console.log("Err", error)
     }
@@ -113,8 +124,8 @@ async function setDial() {
     }
 }
 
-// document.addEventListener("DOMContentLoaded", () => {
-//     if (document.getElementById("signup") || document.getElementById("login")) {
-//         setDial();
-//     }
-// })
+document.addEventListener("DOMContentLoaded", () => {
+    if (document.getElementById("signup") || document.getElementById("login")) {
+        setDial();
+    }
+})

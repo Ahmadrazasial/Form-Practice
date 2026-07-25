@@ -2740,3 +2740,11 @@
 [2026-06-11 18:06:34] INFO : Incoming request: POST /api/auth/reset-password/c3b57c0005debc5d960b1b1a42a585a0dd9207334f9f61313c5fd2a8e899f9c4
 [2026-06-11 18:06:71] INFO : Incoming request: POST /api/auth/reset-password/c3b57c0005debc5d960b1b1a42a585a0dd9207334f9f61313c5fd2a8e899f9c4
 [2026-06-11 18:06:45] INFO : Incoming request: POST /api/auth/reset-password/c3b57c0005debc5d960b1b1a42a585a0dd9207334f9f61313c5fd2a8e899f9c4
+[2026-07-03 17:07:02] INFO : Incoming request: GET /favicon.ico
+[2026-07-03 17:07:69] INFO : Incoming request: POST /api/auth/forgot
+[2026-07-03 17:07:06] INFO : Incoming request: POST /api/auth/forgot
+[2026-07-03 17:07:37] INFO : Incoming request: POST /api/auth/forgot
+[2026-07-03 17:07:53] INFO : Incoming request: POST /api/auth/forgot
+[2026-07-03 17:07:69] INFO : Incoming request: POST /api/auth/forgot
+[2026-07-03 17:07:34] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-07-03 17:07:22] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json

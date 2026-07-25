@@ -102,6 +102,7 @@ async function recoverAccount() {
             const msg = data.message
             const back = "/forgot-password.html"
             const mail = 'https://google.com'
+            forgotFormSec.style.display = "none"
             if (data.success === false) {
                 document.querySelector(".successful")?.remove();
                 forgotFormSec.parentElement.append(successMs(msg, forgotFormSec, "Go Back",back,false,true))

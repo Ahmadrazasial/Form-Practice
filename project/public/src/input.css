@@ -39,7 +39,7 @@
     @apply w-1/6
 }
 .text{
-    @apply text-3xl text-[#007A55] font-['Times_New_Roman']
+    @apply text-2xl text-[#007A55] font-['Times_New_Roman'] text-center
 }
 
 .redirect{

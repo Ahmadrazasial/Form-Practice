@@ -203,7 +203,7 @@ async function loginApi() {
                     const href = "/profile.html"
 
                     // document.getElementById("#container").append(successMs(msg))
-                    lgFormSec.parentElement.append(successMs(msg,lgFormSec,href))
+                    lgFormSec.parentElement.append(successMs(msg,lgFormSec,href,"Go to Dashboard"))
                     
                 }
 

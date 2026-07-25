@@ -48,7 +48,7 @@ function successMs(msg, formsSec, a,btnText, newTab = false, reset = false) {
     const greet = document.createElement("img")
     greet.className = "greet";
     greet.src = "images/success.svg";
-    const text = document.createElement("h3")
+    const text = document.createElement("h4")
     text.className = "text";
     text.textContent = msg || "Success";
     const link = document.createElement("a")
@@ -76,7 +76,8 @@ function successMs(msg, formsSec, a,btnText, newTab = false, reset = false) {
     link.addEventListener("click", (e) => {
         e.preventDefault();
 
-        successSec.remove();
+        // successSec.remove();
+        // forgotFormSec.style.display = "flex"
         if (newTab) {
             window.open(a, "_blank");
         } else {

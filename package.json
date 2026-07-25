@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "css": "npx @tailwindcss/cli -i ./src/input.css -o ./public/style.css --watch"
+    "css": "npx @tailwindcss/cli -i ./project/public/src/input.css -o ./project/public/src/style.css --watch"
   },
   "keywords": [],
   "author": "",
