@@ -159,6 +159,7 @@ async function signupApi() {
             if (!Validate()) {
                 return
             }
+            showLoader();
             const formdata = {
                 firstname: signupform.first.value,
                 lastname: signupform.last.value,
@@ -215,6 +216,8 @@ async function signupApi() {
 
             } catch (error) {
                 console.error("Error", error)
+            }finally{
+                hideLoader()
             }
 
         })

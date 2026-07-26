@@ -41,6 +41,17 @@ if (phoneDiv) {
     })
 }
 
+function showLoader() {
+    const overlay = document.createElement("div");
+     overlay.className = "loader-overlay";
+
+     overlay.innerHTML = `<img class="loader" src="images/loading.svg">`
+     document.body.appendChild(overlay)
+}
+function hideLoader() {
+    document.querySelector(".loader-overlay")?.remove();
+}
+
 function successMs(msg, formsSec, a,btnText, newTab = false, reset = false) {
     const successSec = document.createElement("div")
 
@@ -63,13 +74,13 @@ function successMs(msg, formsSec, a,btnText, newTab = false, reset = false) {
     span.textContent = "Resend";
 
 
-    span.addEventListener("click", async (e) => {
-    e.preventDefault();
+    // span.addEventListener("click", async (e) => {
+    // e.preventDefault();
 
-    successSec.remove();
+    // successSec.remove();
 
-    await recoverAccount();
-});
+    // await recoverAccount();
+// });
 
     sendAgain.textContent = `If u did'nt receive link.Resend Password Reset Link.`
     sendAgain.append(span)

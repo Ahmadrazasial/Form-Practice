@@ -1,9 +1,14 @@
 import ratelimit from "express-rate-limit";
-export const signupLimiter = ratelimit({
-    windowMs: 15 * 60 * 1000,
-    max: 30,
+const fields = {}
+export const createLimiter = (ms,max,msg)=>{
+    fields.message = msg
+    fields.success = false;
+return ratelimit({
+    windowMs: ms,
+    max: max,
     message: {
-        success: false,
-        meassage: "Too many attemps.Please try agin later"
+      
+        fields
     }
 })
+}
