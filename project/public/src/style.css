@@ -199,8 +199,17 @@
   .-top-0 {
     top: calc(var(--spacing) * -0);
   }
+  .-top-36 {
+    top: calc(var(--spacing) * -36);
+  }
   .-top-56 {
     top: calc(var(--spacing) * -56);
+  }
+  .top-0 {
+    top: calc(var(--spacing) * 0);
+  }
+  .top-56 {
+    top: calc(var(--spacing) * 56);
   }
   .z-20 {
     z-index: 20;
@@ -253,8 +262,14 @@
   .h-\[60vh\] {
     height: 60vh;
   }
+  .h-\[300px\] {
+    height: 300px;
+  }
   .h-auto {
     height: auto;
+  }
+  .w-0 {
+    width: calc(var(--spacing) * 0);
   }
   .w-1 {
     width: calc(var(--spacing) * 1);

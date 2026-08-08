@@ -7,7 +7,6 @@ return ratelimit({
     windowMs: ms,
     max: max,
     message: {
-      
         fields
     }
 })

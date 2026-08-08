@@ -143,3 +143,39 @@ Array.from(inputs).forEach(input => {
     input.style.color = "#007A55"
     input.style.outlineColor = "#007A55"
 })
+
+
+function toggleMode(txt,Email,Phone,authErr = true  ,pass = true) {
+    if(authErr ) clearAuthErr(authSpan)
+  
+    if (mode === "email") {
+        clearErr(emailInput)
+        if(pass){ 
+            clearErr(passInput)
+            passInput.value = "";
+        }
+        mode = "phone";
+
+        emailInput.value = "";
+        
+        Email.style.display = "none";
+        Phone.style.display = "block"
+
+
+        toggleBtn.innerText = txt;
+    }
+    else {
+        clearErr(phoneInput)
+        clearErr(userCountry)
+        clearErr(passInput)
+        mode = "email";
+        phoneInput.value = "";
+        passInput.value = "";
+        Email.style.display = "block";
+        Phone.style.display = "none"
+        // clearErr(Phone)
+
+        toggleBtn.innerText = txt;
+    }
+
+}

@@ -15,14 +15,14 @@
 
         const data = await response.json();
         const countries = data.data.objects
-        console.log(countries)
+        // console.log(countries)
 
 
         countries.forEach(country => {
-            console.log(country)
+            // console.log(country)
             const div = document.createElement("div");
             div.className = "country";
-            console.log(`+${country.calling_codes[0]}`)
+            // console.log(`+${country.calling_codes[0]}`)
             const iso = country.codes.alpha_2;
             const name = country.names.common;
             const dial = `+${country.calling_codes[0]}`;
@@ -55,7 +55,8 @@
 if (userCountry) {
     userCountry.addEventListener("click", (e) => {
         countryList.classList.replace("h-0", "h-[60vh]")
-        countryList.classList.replace("-top-0", "-top-56")
+        countryList.classList.replace("w-0", "w-[300px]")
+        countryList.classList.replace("-top-0", "-top-36")
         countryList.classList.remove("opacity-0")
     })
 }
@@ -66,7 +67,8 @@ window.addEventListener("click", (e) => {
 
     if (!countryList.contains(e.target) && !userCountry.contains(e.target)) {
         countryList.classList.replace("h-[60vh]", "h-0");
-        countryList.classList.replace("-top-56", "-top-0");
+        countryList.classList.replace("w-[300px]", "w-0")
+        countryList.classList.replace("-top-36", "-top-0");
         countryList.classList.add("opacity-0");
     }
 });
@@ -95,8 +97,10 @@ if (countryList) {
             flag: item.dataset.flag,
         }
         showCountry(selectedCountry.flag, selectedCountry.iso, Phone, selectedCountry.dial);
+        // country.classList.replace("w-full", "w-0")
         countryList.classList.replace("h-[60vh]", "h-0")
-        countryList.classList.replace("-top-56", "-top-0")
+        countryList.classList.replace("w-[300px]", "w-0")
+        countryList.classList.replace("-top-36", "-top-0")
         countryList.classList.add("opacity-0")
         clearErr(userCountry)
     })

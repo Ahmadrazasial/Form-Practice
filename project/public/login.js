@@ -1,4 +1,3 @@
-
 const lgFormSec = document.getElementById("lgformSec")
 const loginForm = document.getElementById("login");
 const countryList = document.getElementById("countries");
@@ -6,6 +5,7 @@ const userCountry = document.getElementById("userCountry");
 const userFlag = document.getElementById("countryFlag")
 const Phone = document.getElementById("phone")
 const lgEmail = loginForm.querySelector("#lgemailSec");
+console.log(lgEmail)
 const emailInput = lgEmail.querySelector("#email")
 const lgPhone = loginForm.querySelector("#lgnumberSec")
 const phoneInput = lgPhone.querySelector("#phone")
@@ -15,40 +15,14 @@ const togglePass = lgPassword.querySelector("#view")
 const passInputField = lgPassword.querySelector("#passField")
 const toggleBtn = loginForm.querySelector("#toggleBtn")
 const authSpan = loginForm.querySelector("#authError")
+const country = document.querySelector(".country")
 console.log(togglePass,passInput)
 
-let mode = "email"
-function toggleMode() {
-clearAuthErr(authSpan)
-
-    if (mode === "email") {
-        clearErr(emailInput)
-        clearErr(passInput)
-        mode = "phone";
-
-        emailInput.value = "";
-        passInput.value = "";
-        lgEmail.style.display = "none";
-        lgPhone.style.display = "block"
-
-
-        toggleBtn.innerText = "Login with email instead";
-    }
-    else {
-        clearErr(phoneInput)
-        clearErr(userCountry)
-        clearErr(passInput)
-        mode = "email";
-        phoneInput.value = "";
-        passInput.value = "";
-        lgEmail.style.display = "block";
-        lgPhone.style.display = "none"
-        // clearErr(Phone)
-
-        toggleBtn.innerText = "Login with phone instead";
-    }
-
-}
+let mode = "email";
+toggleBtn?.addEventListener("click", () => {
+  const txt = mode === "email" ? "Login with Email instead" : "Login with Phone instead";
+    toggleMode( txt ,lgEmail, lgPhone,authErr = true ,pass = true);
+})
 
 function lgPasswordVal() {
     const password = passInput.value.trim()

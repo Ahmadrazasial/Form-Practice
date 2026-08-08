@@ -3,15 +3,19 @@ const forgotFormSec = document.getElementById("forgotFormSec")
 const forgotForm = document.getElementById("forgot");
 const forgotEmail = forgotForm?.querySelector("#forgotemailSec");
 const emailInput = forgotEmail.querySelector("#email")
+const countryList = document.getElementById("countries");
+const userCountry = document.getElementById("userCountry");
+const userFlag = document.getElementById("countryFlag")
+const Phone = document.getElementById("phone")
+const forgotPhone = forgotForm?.querySelector("#forgotnumberSec")
+const phoneInput = forgotPhone.querySelector("#phone");
+const toggleBtn = forgotForm?.querySelector("#toggleBtn")
 
-// const countryList = document.getElementById("countries");
-// const userCountry = document.getElementById("userCountry");
-// const userFlag = document.getElementById("countryFlag")
-// const Phone = document.getElementById("phone")
-// const forgotPhone = forgotForm?.querySelector("#forgotnumberSec")
-// const phoneInput = forgotPhone.querySelector("#phone");
-// const toggleBtn = forgotForm?.querySelector("#toggleBtn")
-
+ let mode = "email";
+toggleBtn?.addEventListener("click", () => {
+  const txt = mode === "email" ? "Send Code via Email" : "Send Code via Phone SMS";
+    toggleMode( txt,forgotEmail,forgotPhone,authErr = false ,passInput = false);
+})
 function lgemailVal() {
     const email = emailInput.value.trim()
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -28,56 +32,57 @@ function lgemailVal() {
         return true
     }
 }
-// function lgcodeVal() {
+function lgcodeVal() {
 
-//     if (!userFlag.dataset.iso) {
-//         showErr(userCountry, "This field is required");
-//         return false;
-//     }
-//     else {
-//         clearErr(userCountry);
-//         return true
-//     }
-// }
-// function lgphoneVal() {
-//     const phone = phoneInput.value.trim()
-//     if (phone === "") {
-//         showErr(phoneInput, "This field is required");
-//         return false;
-//     }
-//     if (phone.length < 11) {
-//         showErr(phoneInput, "Phone Number must be 11 digits long");
-//         return false;
-//     }
-//     else {
-//         clearErr(phoneInput);
-//         return true
-//     }
-// }
+    if (!userFlag.dataset.iso) {
+        showErr(userCountry, "This field is required");
+        return false;
+    }
+    else {
+        clearErr(userCountry);
+        return true
+    }
+}
+function lgphoneVal() {
+    const phone = phoneInput.value.trim()
+    if (phone === "") {
+        showErr(phoneInput, "This field is required");
+        return false;
+    }
+    if (phone.length < 11) {
+        showErr(phoneInput, "Phone Number must be 11 digits long");
+        return false;
+    }
+    else {
+        clearErr(phoneInput);
+        return true
+    }
+}
 
-// function loginValidation() {
+function loginValidation() {
 
-//     let data = { }
-//     if (mode === "email") {
+    let formData = { }
+    if (mode === "email") {
 
-//         if (!lgemailVal()) {
-//             return false
-//         }
-//         data.email = emailInput.value.trim();
-//     } else {
+        if (!lgemailVal()) {
+            return false
+        }
+        formData.email = emailInput.value.trim();
+    } else {
+        if (!lgcodeVal() && !lgphoneVal()) {
+            return false
+        }
+        lgcodeVal()
+        lgphoneVal()
+        formData.phone = phoneInput.value.trim();
+        console.log(formData)
+    }
+    return formData
 
+}
 
-
-//         lgcodeVal()
-//         lgphoneVal()
-//         data.phone = phoneInput.value
-//     }
-//     return data
-
-// }
-
-const requiredFields = [emailInput];
-const validationArr = [lgemailVal];
+const requiredFields = [emailInput,userCountry,phoneInput];
+const validationArr = [lgemailVal, lgcodeVal, lgphoneVal];
 
 inputClear(requiredFields, validationArr);
 
@@ -85,21 +90,19 @@ inputClear(requiredFields, validationArr);
 async function recoverAccount() {
 
 
-
-    if (!lgemailVal()) {
-        return false;
+if (!loginValidation()) {
+        return false
     }
     try {
         showLoader()
-        let formdata = {};
-        let email = emailInput.value.trim();
-        formdata.email = email
+     
         const res = await fetch("/api/auth/forgot", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formdata)
+            body: JSON.stringify(loginValidation()),
         })
         const data = await res.json();
+        console.log(data)
         const msg = data.message
         const back = "/forgot-password.html"
         const mail = 'https://google.com'
