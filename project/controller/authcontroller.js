@@ -86,8 +86,9 @@ export const login = async (req, res) => {
         const errFields = {}
         const { email, phone, password } = req.body;
 
-        logger.info(`Login attempt for email: ${email}`);
+        
         async function loginAuthen(user, name, pass) {
+            logger.info(`Login attempt for ${name}: ${user ? user.email : email || phone}`);
             if (!user) {
                 errFields.credients = `invalid ${name} / password`;
                 return res.status(400).json({
