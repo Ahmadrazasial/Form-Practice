@@ -10,11 +10,15 @@ const Phone = document.getElementById("phone")
 const forgotPhone = forgotForm?.querySelector("#forgotnumberSec")
 const phoneInput = forgotPhone.querySelector("#phone");
 const toggleBtn = forgotForm?.querySelector("#toggleBtn")
+const otpSec = document.querySelector("#otpFormSec");
+const otpInput = otpSec?.querySelector("#otp");
+const otpSubmit = otpSec?.querySelector("#otpSubmit");
+console.log(otpSec, otpInput, otpSubmit)
 
- let mode = "email";
+let mode = "email";
 toggleBtn?.addEventListener("click", () => {
-  const txt = mode === "email" ? "Send Code via Email" : "Send Code via Phone SMS";
-    toggleMode( txt,forgotEmail,forgotPhone,authErr = false ,passInput = false);
+    const txt = mode === "email" ? "Send Code via Email" : "Send Code via Phone SMS";
+    toggleMode(txt, forgotEmail, forgotPhone, authErr = false, passInput = false);
 })
 function lgemailVal() {
     const email = emailInput.value.trim()
@@ -58,48 +62,42 @@ function lgphoneVal() {
         return true
     }
 }
-
-function loginValidation() {
-
-    let formData = { }
-    if (mode === "email") {
-
-        if (!lgemailVal()) {
-            return false
-        }
-        formData.email = emailInput.value.trim();
-    } else {
-        if (!lgcodeVal() && !lgphoneVal()) {
-            return false
-        }
-        lgcodeVal()
-        lgphoneVal()
-        formData.phone = phoneInput.value.trim();
-        console.log(formData)
+let formData = {}
+function emailValidation() {
+    if (!lgemailVal()) {
+        return false
     }
+    formData.email = emailInput.value.trim();
+
     return formData
 
 }
-
-const requiredFields = [emailInput,userCountry,phoneInput];
+function phoneValidation() {
+    const phonerequired = [lgcodeVal, lgphoneVal]
+    const isValid = phonerequired.map(field => field()).every(Boolean);
+    if(!isValid){
+        return false
+    }
+    formData.phone = phoneInput.value.trim();
+    return formData
+}
+const requiredFields = [emailInput, userCountry, phoneInput];
 const validationArr = [lgemailVal, lgcodeVal, lgphoneVal];
 
 inputClear(requiredFields, validationArr);
 
 
-async function recoverAccount() {
-
-
-if (!loginValidation()) {
+async function emailRecoverAccount() {
+    if (!emailValidation()) {
         return false
     }
     try {
         showLoader()
-     
-        const res = await fetch("/api/auth/forgot", {
+
+        const res = await fetch("/api/auth/forgot/email", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(loginValidation()),
+            body: JSON.stringify(emailValidation()),
         })
         const data = await res.json();
         console.log(data)
@@ -120,6 +118,40 @@ if (!loginValidation()) {
             document.querySelector(".successful")?.remove();
             forgotFormSec.parentElement.append(successMs(data.fields.message, forgotFormSec, back, "Go Back", false, false))
         }
+
+    } catch (error) {
+        console.log("Error ", error)
+    } finally {
+        hideLoader()
+    }
+
+}
+async function phoneRecoverAccount() {
+    if (!phoneValidation()) {
+        return false
+    }
+    try {
+        showLoader()
+
+        const res = await fetch("/api/auth/forgot/phone", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(phoneValidation()),
+        })
+        const data = await res.json();
+        console.log(data)
+        const msg = data.message
+        const back = "/forgot-password.html"
+        
+        if(data.success){
+            forgotFormSec.style.display = "none"
+        otpSec.style.display = "block"
+        document.getElementById("otpMessage").textContent = msg;
+        }
+        if (data.fields.success === false) {
+             document.getElementById("otpMessage").textContent = data.fields.message;
+        }
+
     } catch (error) {
         console.log("Error ", error)
     } finally {
@@ -128,13 +160,54 @@ if (!loginValidation()) {
 
 }
 forgotForm?.addEventListener("submit", async (e) => {
-    e.preventDefault()
-    recoverAccount()
+    e.preventDefault();
+    if (forgotEmail.classList.contains("block") && mode === "email") {
+        emailRecoverAccount()
+    } else {
+        phoneRecoverAccount()
+    }
 })
 document.addEventListener("click", (e) => {
     if (e.target.matches(".resend-text")) {
         e.preventDefault();
         console.log("clicked");
-        recoverAccount();
+        if(mode === "email"){
+            emailRecoverAccount()
+        }else{
+            phoneRecoverAccount()
+        }
     }
 });
+
+async function sendCode() {
+    const url = 'https://messagebird-sms-gateway.p.rapidapi.com/sms';
+    const options = {
+        method: 'POST',
+        headers: {
+            'x-rapidapi-key': 'd347ea0275mshde6afdce1672f1ep100f13jsnf46b51bb675e',
+            'x-rapidapi-host': 'messagebird-sms-gateway.p.rapidapi.com',
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+            sender: 'MessageBird',
+            body: new URLSearchParams('Your verification code is 123456.'),
+            destination: '31600000001,31600000002',
+            reference: '268431687',
+            timestamp: '201308020025',
+            replacechars: 'checked',
+            type: 'normal',
+            udh: undefined,
+            test: undefined,
+            dlr_url: 'http://www.example.com/dlr-messagebird.php'
+        })
+    };
+
+    try {
+        const response = await fetch(url, options);
+        const result = await response.text();
+        console.log(result);
+    } catch (error) {
+        console.error(error);
+    }
+}
+sendCode()

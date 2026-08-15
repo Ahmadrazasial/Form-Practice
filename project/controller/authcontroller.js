@@ -1,11 +1,14 @@
 import { User } from "../models/signupScema.js";
+import crypto from "crypto";
 import logger from "../utils/logger.js";
 import bcrypt from "bcrypt";
 import cookieParser from "cookie-parser";
 import jwt from "jsonwebtoken";
-import crypto from "crypto"
+import { token, hash, expiry } from "../utils/randomToken.js";
 import mongoose from "mongoose";
 import { sendMail } from "../utils/sendmail.js";
+import { validateUser } from "../utils/userValidation.js";
+import { sendSMS } from "../utils/sendCode.js";
 
 
 
@@ -86,7 +89,7 @@ export const login = async (req, res) => {
         const errFields = {}
         const { email, phone, password } = req.body;
 
-        
+
         async function loginAuthen(user, name, pass) {
             logger.info(`Login attempt for ${name}: ${user ? user.email : email || phone}`);
             if (!user) {
@@ -190,20 +193,13 @@ export const getProfile = async (req, res) => {
 
 
 
-export const forgot = async (req, res) => {
+export const forgotEmail = async (req, res) => {
     try {
 
         async function sendLink(user) {
-            const buffer = crypto.randomBytes(32);
-            const token = buffer.toString('hex')
-
             const resetLink = `http://localhost:3000/reset-password/${token}`;
             const html = `click here to reset ur password \n ${resetLink}`
             await sendMail(user.email, "Password Reset", "Reset your password", html)
-
-            const hash = crypto.createHash('sha256').update(token).digest('hex')
-            const expiry = Date.now() + 15 * 60 * 1000
-
             user.resetPasswordToken = hash;
             user.resetPasswordExpiry = expiry;
             await user.save();
@@ -211,35 +207,45 @@ export const forgot = async (req, res) => {
             console.log(token, "\n", hash)
         }
 
-        const { email, phone } = req.body;
-        async function validateUser(user,functionName) {
-            if (!user) {
-                return res.status(400).json({
-                    success: false,
-                    message: "Unable to send the password reset email. Please try again later."
-                })
-            }
-            else {
-                await functionName(user)
-                return res.status(200).json({
-                    success: true,
-                    message: "If an account with that email exists, a password reset link has been sent"
-                })
-            }
-        }
-        if(email){
-        const userCheck = await User.findOne({ email: email.toLowerCase().trim() })
-        console.log(userCheck)
-        console.log(userCheck instanceof mongoose.Model);
-        await validateUser(userCheck,sendLink)
-       
-    }else{
-        const userCheck = await User.findOne({ phoneNumber: phone.trim() })
-        console.log(userCheck)
-        console.log(userCheck instanceof mongoose.Model);
-        await validateUser(userCheck)
-    }
+        const { email } = req.body;
 
+        if (email) {
+            const userCheck = await User.findOne({ email: email.toLowerCase().trim() })
+            console.log(userCheck)
+            console.log(userCheck instanceof mongoose.Model);
+            await validateUser(userCheck, sendLink, "", res)
+
+        }
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "server error" + error
+        })
+    }
+}
+export const forgotPhone = async (req, res) => {
+    try {
+
+        function sendCode(user) {
+            const otp = Math.floor(100000 + Math.random() * 900000).toString();
+            const hash = crypto.createHash('sha256').update(otp).digest('hex')
+            console.log("otp", hash)
+            const otpExpiry = Date.now() + 15 * 60 * 1000; // 10 minutes from now
+            sendSMS(user.phoneNumber, otp);
+            user.resetPasswordToken = hash;
+            user.resetPasswordExpiry = otpExpiry;
+            // user.save();
+
+        }
+
+        const { phone } = req.body;
+
+        const userCheck = await User.findOne({ phoneNumber: phone.trim() })
+        // console.log(userCheck)
+        // console.log(userCheck instanceof mongoose.Model);
+        // sendCode(userCheck)
+        await validateUser(userCheck, sendCode, "", res)
 
     } catch (error) {
         return res.status(500).json({
