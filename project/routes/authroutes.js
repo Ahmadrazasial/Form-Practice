@@ -4,7 +4,8 @@ import { verifyToken } from "../middlewares/auth.js";
 import { loginValidator } from "../middlewares/loginvalidator.js";
 import { forgotValidator } from "../middlewares/forgotvalidation.js";
 import { resetValidate } from "../middlewares/resetValidation.js";
-import {signup,login,getProfile,forgotEmail,forgotPhone,updatePass} from "../controller/authcontroller.js";
+import { otpValidator } from "../middlewares/otpvalidator.js";
+import {signup,login,getProfile,forgotEmail,forgotPhone,verifyOtp,updatePass} from "../controller/authcontroller.js";
 import { createLimiter } from "../utils/ratelimit.js";
 
 const router = Router();
@@ -37,4 +38,5 @@ router.post("/reset-password/:token",resetValidate,updatePass)
 
 router.post("/forgot/email",forgotLimiter,forgotValidator,forgotEmail)
 router.post("/forgot/phone",forgotLimiter,forgotValidator,forgotPhone)
+router.post("/forgot/verify",otpValidator,verifyOtp)
 export default router

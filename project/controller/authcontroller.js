@@ -235,7 +235,7 @@ export const forgotPhone = async (req, res) => {
             sendSMS(user.phoneNumber, otp);
             user.resetPasswordToken = hash;
             user.resetPasswordExpiry = otpExpiry;
-            // user.save();
+            user.save();
 
         }
 
@@ -246,6 +246,57 @@ export const forgotPhone = async (req, res) => {
         // console.log(userCheck instanceof mongoose.Model);
         // sendCode(userCheck)
         await validateUser(userCheck, sendCode, "", res)
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "server error" + error
+        })
+    }
+}
+
+export const verifyOtp = async (req, res) => {
+    try {
+
+        function otpCom(user, otp) {
+            const userOTP = user.resetPasswordToken
+            const expiryTime = user.resetPasswordExpiry
+            const hashedOTP = crypto.createHash('sha256').update(otp).digest('hex')
+            const currentTime = Date.now();
+            if(!userOTP || !expiryTime){
+                return res.status(400).json({
+                    success: false,
+                    message: "Invalid OTP."
+                });
+            }
+            if (currentTime > expiryTime) {
+                return res.status(400).json({
+                    success: false,
+                    message: "OTP has expired. Please request a new code."
+                });
+            }
+            if(userOTP !== hashedOTP){
+                return res.status(400).json({
+                    success: false,
+                    message: "Invalid OTP."
+                });
+            }
+            user.resetPasswordExpiry = expiry;
+            user.resetPasswordToken = hash;
+            
+             user.save();
+            return res.status(200).json({
+                success:true,
+                message:"You phone number is successfully verified.Now you can change your password"
+                ,token:token
+            })
+        }
+
+        const { phone, otp } = req.body;
+
+        const userCheck = await User.findOne({phoneNumber:phone.trim()}).select("-password")
+        console.log(userCheck)
+         otpCom(userCheck,otp);
 
     } catch (error) {
         return res.status(500).json({

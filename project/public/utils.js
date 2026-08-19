@@ -87,8 +87,8 @@ function successMs(msg, formsSec, a,btnText, newTab = false, reset = false) {
     link.addEventListener("click", (e) => {
         e.preventDefault();
 
-        // successSec.remove();
-        // forgotFormSec.style.display = "flex"
+        successSec.remove();
+        forgotFormSec.style.display = "flex"
         if (newTab) {
             window.open(a, "_blank");
         } else {
