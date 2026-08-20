@@ -14,13 +14,14 @@ export const otpValidator = [
     const result = validationResult(req);
 
     if(!result.isEmpty()){
-        const fields = {};
+        const validArr = {success:false,};
         result.array().forEach(r => {
             // console.log(r);
-            fields[r.path] = r.msg
+            
+            validArr[r.path] = r.msg
         });
         // console.log(fields)
-        return res.status(400).json({fields});
+        return res.status(400).json({validArr});
     }
     next();
 }

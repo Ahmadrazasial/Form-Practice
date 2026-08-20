@@ -12,9 +12,10 @@ const phoneInput = forgotPhone.querySelector("#phone");
 const toggleBtn = forgotForm?.querySelector("#toggleBtn")
 const otpSec = document.querySelector("#otpFormSec");
 const otpForm = document.getElementById("otpForm")
-const otpInput = otpSec?.querySelector("#otp");
+const otpInput = document.querySelector("#otp");
+
 const otpSubmit = otpSec?.querySelector("#otpSubmit");
-// console.log(otpSec, otpInput, otpSubmit)
+console.log(otpSec, otpInput, otpSubmit)
 
 let mode = "email";
 toggleBtn?.addEventListener("click", () => {
@@ -158,6 +159,10 @@ async function phoneRecoverAccount() {
         console.log(data)
         const msg = data.message
         const back = "/forgot-password.html"
+        // if(data.fields){
+        //     // showErr(otpInput,data.fields.otp)
+        //     console.log(data.fields.otp)
+        // }
 
         if (data.success === true) {
             forgotFormSec.style.display = "none"
@@ -192,22 +197,28 @@ async function verifyOtp() {
         console.log(formData.phone, otpInput.value)
         const data = await res.json();
         console.log(data)
-        if (data.fields) {
-            showErr(otpInput, data.fields.otp)
-        }
+        
         if (data.success === true) {
+            
             const msg = data.message;
             const resetPage = `reset-password/${data.token}`;
             console.log(resetPage)
             otpSec.style.display = "none";
             otpSec.parentElement.append(successMs(msg, otpSec, resetPage, "Reset Password", true, false))
             ;
-            // window.location.href = resetPage
-
-        } else {
+            
+        }else {
             showErr(otpInput, data.message)
-            return
+            
         }
+        if (data.validArr?.success === false) {
+            console.log(data.validArr.otp)
+            const msg = data.validArr.otp
+            showErr(otpInput, msg)
+            
+        }
+        
+         
     } catch (error) {
         console.log("Error ", error)
     } finally {
