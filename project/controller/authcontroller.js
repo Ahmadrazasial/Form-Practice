@@ -213,7 +213,7 @@ export const forgotEmail = async (req, res) => {
             const userCheck = await User.findOne({ email: email.toLowerCase().trim() })
             console.log(userCheck)
             console.log(userCheck instanceof mongoose.Model);
-            await validateUser(userCheck, sendLink, "", res)
+            await validateUser(userCheck, sendLink, false, res)
 
         }
 
@@ -245,7 +245,7 @@ export const forgotPhone = async (req, res) => {
         // console.log(userCheck)
         // console.log(userCheck instanceof mongoose.Model);
         // sendCode(userCheck)
-        await validateUser(userCheck, sendCode, "", res)
+        await validateUser(userCheck, sendCode, true, res)
 
     } catch (error) {
         return res.status(500).json({

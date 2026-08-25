@@ -123,24 +123,24 @@ async function emailRecoverAccount() {
         const back = "/forgot-password.html"
         const mail = 'https://google.com'
         // forgotFormSec.style.display = "none"
-        if(data.validfields?.success === false){
-                    const obj = data.validfields.fields
-                    console.log(obj)
-                    const inputMap = {
-                            phone: phoneInput,
-                            email: emailInput,
-                           
-                        };
-                        for (const key in obj) {
-                            
-                            const element = obj[key];
-                            const input = inputMap[key]
-                            if(input){
-                                showErr(input,element)
-                            }
-                        }
-                        return;
+        if (data.validfields?.success === false) {
+            const obj = data.validfields.fields
+            console.log(obj)
+            const inputMap = {
+                phone: phoneInput,
+                email: emailInput,
+
+            };
+            for (const key in obj) {
+
+                const element = obj[key];
+                const input = inputMap[key]
+                if (input) {
+                    showErr(input, element)
                 }
+            }
+            return;
+        }
         if (data.fields?.success === false) {
             document.querySelector(".successful")?.remove();
             showErr(emailInput, data.fields.message)
@@ -166,9 +166,9 @@ async function emailRecoverAccount() {
 
 }
 async function phoneRecoverAccount() {
-    // if (!phoneValidation()) {
-    //     return false
-    // }
+    if (!phoneValidation()) {
+        return false
+    }
     const phone = phoneInput.value.trim();
     try {
         showLoader()
@@ -176,7 +176,7 @@ async function phoneRecoverAccount() {
         const res = await fetch("/api/auth/forgot/phone", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({phone:phone}),
+            body: JSON.stringify(phoneValidation()),
         })
         const data = await res.json();
         console.log(data)
@@ -186,24 +186,24 @@ async function phoneRecoverAccount() {
         //     // showErr(otpInput,data.fields.otp)
         //     console.log(data.fields.otp)
         // }
-if(data.validfields?.success === false){
-                    const obj = data.validfields.fields
-                    console.log(obj)
-                    const inputMap = {
-                            phone: phoneInput,
-                            email: emailInput,
-                           
-                        };
-                        for (const key in obj) {
-                            
-                            const element = obj[key];
-                            const input = inputMap[key]
-                            if(input){
-                                showErr(input,element)
-                            }
-                        }
-                        return;
+        if (data.validfields?.success === false) {
+            const obj = data.validfields.fields
+            console.log(obj)
+            const inputMap = {
+                phone: phoneInput,
+                email: emailInput,
+
+            };
+            for (const key in obj) {
+
+                const element = obj[key];
+                const input = inputMap[key]
+                if (input) {
+                    showErr(input, element)
                 }
+            }
+            return;
+        }
         if (data.success === true) {
             forgotFormSec.style.display = "none"
             otpSec.style.display = "block"
@@ -213,6 +213,7 @@ if(data.validfields?.success === false){
         }
         if (data.fields.success === false) {
             showErr(phoneInput, data.fields.message)
+            document.getElementById("otpMessage").textContent = data.fields.message;
         }
 
     } catch (error) {
@@ -223,9 +224,9 @@ if(data.validfields?.success === false){
 
 }
 async function verifyOtp() {
-    // if(!otpVal()){
-    //     return false
-    // }
+    if (!otpVal()) {
+        return false
+    }
     try {
         showLoader()
         const res = await fetch("/api/auth/forgot/verify", {
@@ -239,13 +240,13 @@ async function verifyOtp() {
         console.log(data)
 
         if (data.success === true) {
-
             const msg = data.message;
             const resetPage = `reset-password/${data.token}`;
             console.log(resetPage)
             otpSec.style.display = "none";
             otpSec.parentElement.append(successMs(msg, otpSec, resetPage, "Reset Password", true, false))
-                ;
+            forgotForm.reset();
+            otpForm.reset();
 
         } else {
             showErr(otpInput, data.message)
