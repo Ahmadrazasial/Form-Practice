@@ -20,19 +20,19 @@ export  const signupValidate = [
     //Phone Number
     body("number").
     trim().
-    notEmpty().withMessage("Phone number is required").
+    notEmpty().withMessage("Phone number is required").bail().
     isLength(7).withMessage("Phone number must be 7 digits long"),
 
     //Email
     body("email").trim()
-    .notEmpty().withMessage("email is required")
+    .notEmpty().withMessage("Email is required").bail()
     .toLowerCase()
     .isEmail().withMessage("Invalid email.Please enter a valid email address"),
     
     //Password
     body("password")
     .trim()
-    .notEmpty().withMessage("Password is required")
+    .notEmpty().withMessage("Password is required").bail()
     .isStrongPassword(
         {
             minLength:8,
@@ -49,10 +49,16 @@ export  const signupValidate = [
             if(!result.isEmpty()){
                 const fields = {}
                 result.array().forEach(r => {
+                    
                     fields[r.path] = r.msg 
                 });
+                const valifields ={};
                 return res.status(400).json({
-                fields
+                validfields:{
+                    success:false,
+                    fields
+
+                }
             });
             }
            next();

@@ -108,6 +108,7 @@ async function emailRecoverAccount() {
     if (!emailValidation()) {
         return false
     }
+    const email = emailInput.value.trim()
     try {
         showLoader()
 
@@ -121,20 +122,41 @@ async function emailRecoverAccount() {
         const msg = data.message
         const back = "/forgot-password.html"
         const mail = 'https://google.com'
-        forgotFormSec.style.display = "none"
+        // forgotFormSec.style.display = "none"
+        if(data.validfields?.success === false){
+                    const obj = data.validfields.fields
+                    console.log(obj)
+                    const inputMap = {
+                            phone: phoneInput,
+                            email: emailInput,
+                           
+                        };
+                        for (const key in obj) {
+                            
+                            const element = obj[key];
+                            const input = inputMap[key]
+                            if(input){
+                                showErr(input,element)
+                            }
+                        }
+                        return;
+                }
+        if (data.fields?.success === false) {
+            document.querySelector(".successful")?.remove();
+            showErr(emailInput, data.fields.message)
+            forgotFormSec.parentElement.append(successMs(data.fields.message, forgotFormSec, back, "Go Back", false, false))
 
-
+            return;
+        }
         if (data.success === false) {
             document.querySelector(".successful")?.remove();
             forgotFormSec.parentElement.append(successMs(msg, forgotFormSec, back, "Go Back", false, true))
+            return;
         } else {
             document.querySelector(".successful")?.remove();
             forgotFormSec.parentElement.append(successMs(msg, forgotFormSec, mail, "Open Mail", true, true))
         }
-        if (data.fields.success === false) {
-            document.querySelector(".successful")?.remove();
-            forgotFormSec.parentElement.append(successMs(data.fields.message, forgotFormSec, back, "Go Back", false, false))
-        }
+
 
     } catch (error) {
         console.log("Error ", error)
@@ -144,16 +166,17 @@ async function emailRecoverAccount() {
 
 }
 async function phoneRecoverAccount() {
-    if (!phoneValidation()) {
-        return false
-    }
+    // if (!phoneValidation()) {
+    //     return false
+    // }
+    const phone = phoneInput.value.trim();
     try {
         showLoader()
 
         const res = await fetch("/api/auth/forgot/phone", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(phoneValidation()),
+            body: JSON.stringify({phone:phone}),
         })
         const data = await res.json();
         console.log(data)
@@ -163,7 +186,24 @@ async function phoneRecoverAccount() {
         //     // showErr(otpInput,data.fields.otp)
         //     console.log(data.fields.otp)
         // }
-
+if(data.validfields?.success === false){
+                    const obj = data.validfields.fields
+                    console.log(obj)
+                    const inputMap = {
+                            phone: phoneInput,
+                            email: emailInput,
+                           
+                        };
+                        for (const key in obj) {
+                            
+                            const element = obj[key];
+                            const input = inputMap[key]
+                            if(input){
+                                showErr(input,element)
+                            }
+                        }
+                        return;
+                }
         if (data.success === true) {
             forgotFormSec.style.display = "none"
             otpSec.style.display = "block"
@@ -197,28 +237,28 @@ async function verifyOtp() {
         console.log(formData.phone, otpInput.value)
         const data = await res.json();
         console.log(data)
-        
+
         if (data.success === true) {
-            
+
             const msg = data.message;
             const resetPage = `reset-password/${data.token}`;
             console.log(resetPage)
             otpSec.style.display = "none";
             otpSec.parentElement.append(successMs(msg, otpSec, resetPage, "Reset Password", true, false))
-            ;
-            
-        }else {
+                ;
+
+        } else {
             showErr(otpInput, data.message)
-            
+
         }
         if (data.validArr?.success === false) {
             console.log(data.validArr.otp)
             const msg = data.validArr.otp
             showErr(otpInput, msg)
-            
+
         }
-        
-         
+
+
     } catch (error) {
         console.log("Error ", error)
     } finally {
@@ -255,35 +295,35 @@ document.addEventListener("click", (e) => {
 
 
 
-async function sendCode() {
-    const url = 'https://messagebird-sms-gateway.p.rapidapi.com/sms';
-    const options = {
-        method: 'POST',
-        headers: {
-            'x-rapidapi-key': 'd347ea0275mshde6afdce1672f1ep100f13jsnf46b51bb675e',
-            'x-rapidapi-host': 'messagebird-sms-gateway.p.rapidapi.com',
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: new URLSearchParams({
-            sender: 'MessageBird',
-            body: new URLSearchParams('Your verification code is 123456.'),
-            destination: '31600000001,31600000002',
-            reference: '268431687',
-            timestamp: '201308020025',
-            replacechars: 'checked',
-            type: 'normal',
-            udh: undefined,
-            test: undefined,
-            dlr_url: 'http://www.example.com/dlr-messagebird.php'
-        })
-    };
+// async function sendCode() {
+//     const url = 'https://messagebird-sms-gateway.p.rapidapi.com/sms';
+//     const options = {
+//         method: 'POST',
+//         headers: {
+//             'x-rapidapi-key': 'd347ea0275mshde6afdce1672f1ep100f13jsnf46b51bb675e',
+//             'x-rapidapi-host': 'messagebird-sms-gateway.p.rapidapi.com',
+//             'Content-Type': 'application/x-www-form-urlencoded'
+//         },
+//         body: new URLSearchParams({
+//             sender: 'MessageBird',
+//             body: new URLSearchParams('Your verification code is 123456.'),
+//             destination: '31600000001,31600000002',
+//             reference: '268431687',
+//             timestamp: '201308020025',
+//             replacechars: 'checked',
+//             type: 'normal',
+//             udh: undefined,
+//             test: undefined,
+//             dlr_url: 'http://www.example.com/dlr-messagebird.php'
+//         })
+//     };
 
-    try {
-        const response = await fetch(url, options);
-        const result = await response.text();
-        console.log(result);
-    } catch (error) {
-        console.error(error);
-    }
-}
-sendCode()
+//     try {
+//         const response = await fetch(url, options);
+//         const result = await response.text();
+//         console.log(result);
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
+// sendCode()

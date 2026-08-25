@@ -178,8 +178,26 @@ async function signupApi() {
                 const data = await res.json();
                 console.log(data)
                 // if (!data.success) { return }
-
-
+                if(data.validfields?.success === false){
+                    const obj = data.validfields.fields
+                    console.log(obj)
+                    const inputMap = {
+                        firstname:Firstname,
+                        lastname:Lastname,
+                            number: Phone,
+                            email: Email,
+                            password:Password
+                        };
+                        for (const key in obj) {
+                            
+                            const element = obj[key];
+                            const input = inputMap[key]
+                            if(input){
+                                showErr(input,element)
+                            }
+                        }
+                        return;
+                }
                 if (data.success === false){
                     const obj = data.fields;
                     // Object.assign(serverErrors, obj);
@@ -223,7 +241,7 @@ async function signupApi() {
         })
     }
 }
-spformsSec.parentElement.append(successMs("signed up",spformsSec,"/","Sigup"))
+// spformsSec.parentElement.append(successMs("signed up",spformsSec,"/","Sigup"))
 signupApi()
 
 

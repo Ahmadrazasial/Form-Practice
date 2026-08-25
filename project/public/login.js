@@ -20,6 +20,7 @@ console.log(togglePass,passInput)
 
 let mode = "email";
 toggleBtn?.addEventListener("click", () => {
+    
   const txt = mode === "email" ? "Login with Email instead" : "Login with Phone instead";
     toggleMode( txt ,lgEmail, lgPhone,authErr = true ,pass = true);
 })
@@ -129,21 +130,22 @@ console.log(passInputField)
 
 togglePassword(showArray,inputsArray)
 inputFocus(fieldArray)
-
+//  const formData = {}
+//             formData.password = passInput.value.trim();
+//             formData.email = emailInput.value.trim();
+            // formData.phone = phoneInput.value
 async function loginApi() {
     // let loginForm = document.getElementById("login");
     if (loginForm) {
         loginForm.addEventListener("submit", async (e) => {
             e.preventDefault();
             clearAuthErr(authSpan)
+
+      
+           
             const formdata = loginValidation();
             if (!formdata.password || (!formdata.email && !formdata.phone)) return
-            // console.log(formdata);
-            // const formdata = {
-            //     email: emailInput.value.trim(),
-            //     password: passInput.value.trim()
-            // }
-            console.log(formdata)
+           
             try {
                 const res = await fetch("/api/auth/login",
                     {
@@ -152,7 +154,26 @@ async function loginApi() {
                         body: JSON.stringify(formdata)
                     })
                 const dataRet = await res.json();
-                // console.log(dataRet)
+                console.log(dataRet)
+                if(dataRet.validfields?.success === false){
+                    const obj = dataRet.validfields.fields
+                    console.log(obj)
+                    const inputMap = {
+                      
+                            phone: phoneInput,
+                            email: emailInput,
+                            password:passInput
+                        };
+                        for (const key in obj) {
+                            
+                            const element = obj[key];
+                            const input = inputMap[key]
+                            if(input){
+                                showErr(input,element)
+                            }
+                        }
+                        return;
+                }
 
                 if (dataRet.success === false) {
                     const obj = dataRet.errFields
@@ -165,6 +186,7 @@ async function loginApi() {
 
                        showAuthErr(authSpan,element)
                     }
+                    return;
                 }else{
 
                     // const jwtToken = dataRet.token

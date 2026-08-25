@@ -5,13 +5,13 @@ export const loginValidator = [
     //email
 
     body("email").optional().trim()
-    .notEmpty().withMessage("Email is required")
+    .notEmpty().withMessage("Email is required").bail()
     .isEmail()
     .withMessage("invalid email"),
 
     body("phone").optional().
     trim().
-    notEmpty().withMessage("Phone number is required").
+    notEmpty().withMessage("Phone number is required").bail().
     isLength(6).withMessage("Phone number must be 7 digits long"),
    
     body("password").
@@ -35,7 +35,13 @@ export const loginValidator = [
             // console.log(r);
             fields[r.path] = r.msg
         });
-        return res.status(400).json({fields});
+        const validfields = {}
+        return res.status(400).json({
+           validfields:{
+            success:false,
+            fields
+           }
+        });
     }
     next();
 }

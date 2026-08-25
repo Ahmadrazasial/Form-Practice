@@ -5,14 +5,14 @@ export const forgotValidator = [
     //email
 
     body("email").trim().optional()
-    .notEmpty().withMessage("Email is required")
+    .notEmpty().withMessage("Email is required").bail()
     .isEmail()
     .withMessage("invalid email"),
 
-    body("phone").optional().
-    trim().
-    notEmpty().withMessage("Phone number is required").
-    isLength(6).withMessage("Phone number must be 7 digits long"),
+    body("phone").
+    trim().optional().
+    notEmpty().withMessage("Phone number is required").bail().
+    isLength(10).withMessage("Phone number must be 10 digits long"),
    
     
 
@@ -30,9 +30,16 @@ export const forgotValidator = [
         const fields = {};
         result.array().forEach(r => {
             // console.log(r);
+            
             fields[r.path] = r.msg
         });
-        return res.status(400).json({fields});
+        const validfields = {};
+        return res.status(400).json({
+            validfields:{
+                success:false,
+                fields
+            }
+            });
     }
     next();
 }
