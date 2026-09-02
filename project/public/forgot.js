@@ -122,7 +122,7 @@ async function emailRecoverAccount() {
         const msg = data.message
         const back = "/forgot-password.html"
         const mail = 'https://google.com'
-        // forgotFormSec.style.display = "none"
+        forgotFormSec.style.display = "none"
         if (data.validfields?.success === false) {
             const obj = data.validfields.fields
             console.log(obj)
@@ -144,17 +144,17 @@ async function emailRecoverAccount() {
         if (data.fields?.success === false) {
             document.querySelector(".successful")?.remove();
             showErr(emailInput, data.fields.message)
-            forgotFormSec.parentElement.append(successMs(data.fields.message, forgotFormSec, back, "Go Back", false, false))
+            forgotFormSec.parentElement.append(successMs(data.fields.message, forgotFormSec, back, "Go Back", false,false, false))
 
             return;
         }
         if (data.success === false) {
             document.querySelector(".successful")?.remove();
-            forgotFormSec.parentElement.append(successMs(msg, forgotFormSec, back, "Go Back", false, true))
+            forgotFormSec.parentElement.append(successMs(msg, forgotFormSec, back, "Go Back", false,false, true))
             return;
         } else {
             document.querySelector(".successful")?.remove();
-            forgotFormSec.parentElement.append(successMs(msg, forgotFormSec, mail, "Open Mail", true, true))
+            forgotFormSec.parentElement.append(successMs(msg, forgotFormSec, mail, "Open Mail",true, true, true))
         }
 
 
@@ -244,7 +244,7 @@ async function verifyOtp() {
             const resetPage = `reset-password/${data.token}`;
             console.log(resetPage)
             otpSec.style.display = "none";
-            otpSec.parentElement.append(successMs(msg, otpSec, resetPage, "Reset Password", true, false))
+            otpSec.parentElement.append(successMs(msg, otpSec, resetPage, "Reset Password", true,true, false))
             forgotForm.reset();
             otpForm.reset();
 

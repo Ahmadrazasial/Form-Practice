@@ -52,13 +52,17 @@ function hideLoader() {
     document.querySelector(".loader-overlay")?.remove();
 }
 
-function successMs(msg, formsSec, a,btnText, newTab = false, reset = false) {
+function successMs(msg, formsSec, a,btnText,success = false, newTab = false, reset = false) {
     const successSec = document.createElement("div")
 
     successSec.className = "successful";
     const greet = document.createElement("img")
     greet.className = "greet";
-    greet.src = "images/success.svg";
+    if(success){
+        greet.src = "images/success.svg";
+    } else {
+        greet.src = "images/error.svg";
+    }
     const text = document.createElement("h4")
     text.className = "text";
     text.textContent = msg || "Success";
@@ -88,7 +92,7 @@ function successMs(msg, formsSec, a,btnText, newTab = false, reset = false) {
         e.preventDefault();
 
         successSec.remove();
-        forgotFormSec.style.display = "flex"
+        formsSec.style.display = "flex"
         if (newTab) {
             window.open(a, "_blank");
         } else {
@@ -171,6 +175,8 @@ function toggleMode(txt,Email,Phone,authErr = true  ,pass = true) {
         mode = "email";
         phoneInput.value = "";
         passInput.value = "";
+        userFlag.src = "";
+        userFlag.dataset.iso = "";
         Email.style.display = "block";
         Phone.style.display = "none"
         // clearErr(Phone)
