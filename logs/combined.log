@@ -2748,3 +2748,8 @@
 [2026-07-03 17:07:69] INFO : Incoming request: POST /api/auth/forgot
 [2026-07-03 17:07:34] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
 [2026-07-03 17:07:22] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-11-23 17:11:11] INFO : Incoming request: GET /favicon.ico
+[2026-11-23 17:11:34] INFO : Incoming request: POST /api/auth/signup
+[2026-11-23 17:11:36] INFO : Signup attempt for email: ahmadrazauch15@gmail.com
+[2026-11-23 17:11:02] INFO : User created successfully: ahmadrazauch15@gmail.com
+[2026-11-23 17:11:18] INFO : Incoming request: GET /.well-known/appspecific/com.chrome.devtools.json

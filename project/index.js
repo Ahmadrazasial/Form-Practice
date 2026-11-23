@@ -1,5 +1,4 @@
 import dotenv from "dotenv";
-
 import express from "express";
 import mongoose from "mongoose";
 import path from "path"
@@ -24,7 +23,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(cors(
     {
-        origin: `http://localhost:${port}`,
+        origin: true,
         credentials: true
     }
 ))
@@ -33,7 +32,10 @@ app.use((req, res, next) => {
     next();
 });
 
-const connect = await mongoose.connect(process.env.DB_URL);
+if (mongoose.connection.readyState === 0) {
+    const connect = await mongoose.connect(process.env.DB_URL);
+}
+
 // app.get("/", (req, res) => {
 //     res.send("API running");
 // });
@@ -43,7 +45,13 @@ app.use("/api/auth/", router)
 app.get("/reset-password/:token",(req,res)=>{
     res.sendFile(path.join(__dirname,"public","reset-password.html"))
 })
+
+
+if(process.env.NODE_ENV !== 'production'){
 app.listen(port, () => {
     console.log(`Server running on ${port}`);
 })
-console.log("working")
+}
+
+
+export default app;
